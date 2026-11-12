@@ -176,13 +176,13 @@ src/
 | `cloudAgent/`                            | Ndị ọrụ igwe ojii (Codex Cloud, Devin, Jules) — hụ `docs/frameworks/CLOUD_AGENT.md`                                                                                                                                                                                                                                   |
 | `combos/`                                | Mkpebi nchikota + degharịa ndị enyemaka                                                                                                                                                                                                                                                                               |
 | `audit/`                                 | Ndị na-enye aka nri mmemme: `highLevelActions.ts` (onye na-enye ohere + `isHighLevelAction()`), `activityIcons.ts` (omume → icon/verb map), `timeline.ts` (groupByDay/relativeTime) — hụ `docs/architecture/MONITORING_SECTIONS.md`                                                                                   |
-| `compliance/`                            | Onye na-eweta ndekọ ndekọ + nyocha — hụ `docs/security/COMPLIANCE.md`                                                                                                                                                                                                                                                 |
+| `compliance/`                            | Onye na-ahụ maka nyocha ndekọ + nyocha — hụ `docs/security/COMPLIANCE.md`                                                                                                                                                                                                                                             |
 | `compression/`                           | Glu igwe mkpakọ (igwe na-ebi na `open-sse/services/compression/`)                                                                                                                                                                                                                                                     |
 | `config/`                                | Ndị enyemaka nhazi oge ọsọ                                                                                                                                                                                                                                                                                            |
 | `db/`                                    | 120 + ngalaba DB modul + 168 ọpụpụ (na-aga ebe a mgbe niile maka SQLite)                                                                                                                                                                                                                                              |
 | `quota/`                                 | Njin na-ekekọrịta oke: `dimensions.ts` (types/Zod), `types.ts` (QuotaStore interface ), `sqliteQuotaStore.ts`, `redisQuotaStore.ts`, `storeFactory.ts`, `fairShare.ts`, `burnRate.ts`, `planResolver.ts`, `planRegistry.ts`, `saturationSignals.ts`, `enforce.ts`, `spendRecorder.ts` — `docs/routing/QUOTA_SHARE.md` |
 | `radar/`                                 | Onye ahịa katalọgụ ihe nlere nke rada: `feedSchema.ts`, `pinnedKeys.ts`, `verify.ts`, `sync.ts`, `applyFeed.ts`, `index.ts` (`getRadarCatalog()`) — hụ `docs/frameworks/RADAR.md`                                                                                                                                     |
-| `display/`                               | ndị na-enyere aka nhazi usoro UI (ọnụahịa, latency, wdg)                                                                                                                                                                                                                                                              |
+| `display/`                               | ndị inyeaka nhazi usoro UI (ọnụahịa, latency, wdg)                                                                                                                                                                                                                                                                    |
 | `embeddings/`                            | Ndị enyemaka ọrụ mgbakwunye                                                                                                                                                                                                                                                                                           |
 | `env/`                                   | Env mgbanwe ntule nkwado +                                                                                                                                                                                                                                                                                            |
 | `evals/`                                 | Eval framework (suites, runner, runtime) — hụ `docs/frameworks/EVALS.md`                                                                                                                                                                                                                                              |
@@ -191,9 +191,9 @@ src/
 | `memory/`                                | Ebe nchekwa mkparịta ụka (SQLite FTS5 + sqlite-vec ngwakọ RRF + Qdrant tier 2) — hụ `docs/frameworks/MEMORY.md`                                                                                                                                                                                                       |
 | `memory/embedding/`                      | oyi akwa ntinye ọtụtụ isi mmalite: `index.ts` (ihe ngwọta), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (atụmatụ 21)                                                                                                                                                               |
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + ngwakọ RRF (FTS5 + vector, k = 60). Ume-ume-init, na-eweda nke ọma mgbe sqlite-vec adịghị. (Atụmatụ 21)                                                                                                                                                                 |
-| `memory/reindex.ts`                      | `runReindexBatch()` — na-ahazi ncheta yana `needs_reindex=1` n'azụ; nke a na-akpọ nke `POST /api/memory/reindex` na ndị umengwụ-ndaghachi azụ ụzọ. (Atụmatụ 21)                                                                                                                                                       |
+| `memory/reindex.ts`                      | `runReindexBatch()` — na-ahazi ncheta yana `needs_reindex=1` n'azụ; nke a na-akpọ nke `POST /api/memory/reindex` na ndị umengwụ-ndaghachi ụzọ. (Atụmatụ 21)                                                                                                                                                           |
 | `monitoring/`                            | Nyocha ahụike, metrics na-apụta                                                                                                                                                                                                                                                                                       |
-| `oauth/`                                 | OAuth/import na-asọba maka modul ndị na-enye 22 (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, traaueth, qodi-coding, zero-coding, qodi-copilot , qodi-copilot zed)                            |
+| `oauth/`                                 | OAuth/import na-asọba maka modul ndị na-enye 22 (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, traaueth, qodi-coding, zeoder, qodi-copilot, zero-coding, qodi-copilot zed)                     |
 | `plugins/`                               | Ndekọ ngwa mgbakwunye                                                                                                                                                                                                                                                                                                 |
 | `promptCache/`                           | Ebe nkwụsịtụ ebe nchekwa ihe n'ụdị anthropic                                                                                                                                                                                                                                                                          |
 | `skills/`                                | Usoro nka (wuru na + ahịa + SkillsSH) — hụ `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                                |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `components/`                    | Akụkụ dashboard API: nkwụnye n'elu `packages/ui-kit` — hụ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: akara ngosi aha nke ihuenyo na-eji → Lucide components (`<Icon>`)                  |
-| `constants/providers.ts`         | **381 ndị na-enye** ya na nkwado Zod (isi iyi nke eziokwu)                                     |
+| `constants/providers.ts`         | **389 ndị na-enye** ya na nkwado Zod (isi iyi nke eziokwu)                                     |
 | `constants/cliTools.ts`          | Ndekọ akụrụngwa CLI mpụga                                                                      |
 | `constants/routingStrategies.ts` | **20 ụzọ aghụghọ** na ihe ndị ka mkpa                                                          |
 | `constants/publicApiRoutes.ts`   | Ụzọ chọrọ auth bearer (vs njikwa).                                                             |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — Oghere Ọrụ Injin Nkwanye Data
+## `open-sse/` — Streaming Engine Workspace
 
-Oghere ọrụ npm dị iche (`@omniroute/open-sse`). Ọ na-ahụ maka nhazi arịrịọ + mmezu nke ndị na-eweta ọrụ.
+Ebe ọrụ npm iche (`@omniroute/open-sse`). Ejikwa arịrịọ nhazi + onye na-eweta ihe.
 
 ```
 open-sse/
-├── handlers/            # Faịlụ 16 (ndị njikwa 12 + ndị enyemaka 4): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, wdg.
-├── executors/           # Modulu mmezu 150 (klaasị ndị na-agbatị BaseExecutor + ndị enyemaka nke onye na-eweta ọ bụla)
-├── translator/          # Ndị ntụgharị usoro (arịrịọ 9, nzaghachi 9, ndị enyemaka 9)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # Modulu ọrụ ~80+ (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, wdg.)
-├── mcp-server/          # Sava MCP (ngwaọrụ 110, ụzọ mbufe 3, oke ikike 33)
-├── config/              # Ndebanye ndị na-eweta/ụdị, nhazi nkụnye isi, aha nnọchi ụdị
-├── utils/               # Klayentị TLS, proxy fetch/dispatcher, ndị enyemaka netwọkụ
-├── index.ts             # Ebe mbata oghere ọrụ
-├── package.json         # Nkọwa oghere ọrụ
-├── tsconfig.json        # Nhazi TS nke oghere ọrụ
-└── types.d.ts           # Nkwupụta ụdị nke oghere ọrụ
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| Ụzọ                         | Ebumnuche                                                                                |
-| --------------------------- | ---------------------------------------------------------------------------------------- |
-| `server.ts`                 | Usoro ndụ sava MCP (ụzọ mbufe stdio + HTTP)                                              |
-| `httpTransport.ts`          | Ụzọ mbufe HTTP Streamable + SSE (`/api/mcp/sse`, `/api/mcp/stream`)                      |
-| `audit.ts`                  | Ide ndekọ nyocha n'ime tebụl `mcp_tool_audit`                                            |
-| `scopeEnforcement.ts`       | Nnyocha oke ikike maka ngwa ọrụ ọ bụla                                                   |
-| `runtimeHeartbeat.ts`       | Mkpụrụobi ahụike gaa na `DATA_DIR/runtime/mcp-heartbeat.json`                            |
-| `descriptionCompressor.ts`  | Mkpakọ metadata nkọwa ngwa ọrụ iji chekwaa ọnọdụ                                         |
-| `schemas/tools.ts`          | Nkọwa ngwa ọrụ ntọala 36 + oke ikike                                                     |
-| `tools/advancedTools.ts`    | Mmejuputa ngwa ọrụ dị elu                                                                |
-| `tools/memoryTools.ts`      | Ngwa ọrụ ebe nchekwa 3 (ịchọ/ịgbakwunye/ihichapụ)                                        |
-| `tools/skillTools.ts`       | Ngwa ọrụ nka 4 (ndepụta/ime ka ọ rụọ ọrụ/imezu/mmezu)                                    |
-| `tools/compressionTools.ts` | Ngwa ọrụ mkpakọ 5                                                                        |
-| `README.md`                 | README ime sava MCP (e jikọtara ya n'akụkụ abụọ site na `docs/frameworks/MCP-SERVER.md`) |
+| Ụzọ                         | Ebumnuche                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| `server.ts`                 | MCP nkesa lifecycle (stdio + HTTP transports)                                   |
+| `httpTransport.ts`          | HTTP Streamable + SSE transports (`/api/mcp/sse`, `/api/mcp/stream`)            |
+| `audit.ts`                  | Nyochaa ndekọ na tebụl `mcp_tool_audit`                                         |
+| `scopeEnforcement.ts`       | Nkwado oke n'otu ngwaọrụ                                                        |
+| `runtimeHeartbeat.ts`       | Ahụ ike obi iti ruo `DATA_DIR/runtime/mcp-heartbeat.json`                       |
+| `descriptionCompressor.ts`  | Pịa metadata nkọwa ngwá ọrụ iji chekwaa ọnọdụ                                   |
+| `schemas/tools.ts`          | 36 nkọwa ngwaọrụ ntọala + scopes                                                |
+| `tools/advancedTools.ts`    | Mmejuputa ngwá ọrụ dị elu                                                       |
+| `tools/memoryTools.ts`      | 3 ngwaọrụ ebe nchekwa (search/add/clear)                                        |
+| `tools/skillTools.ts`       | Ngwá ọrụ nka 4 (list/enable/execute/executions)                                 |
+| `tools/compressionTools.ts` | 5 ngwa mkpakọ                                                                   |
+| `README.md`                 | Ihe nkesa MCP ime README (njikọ gafere site na `docs/frameworks/MCP-SERVER.md`) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Mwekota CLI mpụga + OmniRoute CLI                                                             |
 | `I18N.md`                   | i18n architecture, na-agbakwunye asụsụ, mpaghara 67                                           |
 | `UNINSTALL.md`              | Hichaa usoro iwepụ                                                                            |
-| `PROVIDER_REFERENCE.md`     | **Emepụtara akpaaka** Katalọgụ nke ndị na-eweta 381 (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Emepụtara akpaaka** Katalọgụ nke ndị na-eweta 389 (regen: `npm run gen:provider-reference`) |
 
 ### Subsystem miri-mikpu
 

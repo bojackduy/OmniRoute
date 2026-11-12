@@ -193,7 +193,7 @@ src/
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + gibrid RRF (FTS5 + vektor, k = 60). Lazy-init, sqlite-vec mavjud bo'lmaganda yaxshi yomonlashadi. (21-reja)                                                                                                                                                                 |
 | `memory/reindex.ts`                      | `runReindexBatch()` — xotiralarni fonda `needs_reindex=1` bilan qayta ishlaydi; `POST /api/memory/reindex` va dangasa to'ldirish yo'li bilan chaqiriladi. (21-reja)                                                                                                                                                       |
 | `monitoring/`                            | Salomatlik tekshiruvlari, emissiya ko'rsatkichlari                                                                                                                                                                                                                                                                        |
-| `oauth/`                                 | 22 ta provayder modullari uchun OAuth/import oqimlari (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-kodlash, kiro, qoaue, ochiq, zed-hosted, zed)                                                               |
+| `oauth/`                                 | 22 ta provayder moduli uchun OAuth/import oqimlari (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-kodlash, kiro, qoaue, ochiq, zed-hosted, zed)                                                                  |
 | `plugins/`                               | Plagin ro'yxatga olish kitobi                                                                                                                                                                                                                                                                                             |
 | `promptCache/`                           | Antropik uslubdagi tezkor kesh cheklash nuqtalari                                                                                                                                                                                                                                                                         |
 | `skills/`                                | Ko'nikmalar tizimi (o'rnatilgan + bozori + SkillsSH) — qarang: `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Boshqaruv paneli komponenti API: `packages/ui-kit` — ustidagi adapterlar `docs/architecture/DESIGN_SYSTEM.md` qarang |
 | `constants/iconMap.ts`           | `ICON_MAP`: ekranlar tomonidan ishlatiladigan piktogramma nomlari → Lucide komponentlari (`<Icon>`)                  |
-| `constants/providers.ts`         | **381 ta provayder** Zod validation bilan (haqiqat manbai)                                                           |
+| `constants/providers.ts`         | **389 ta provayder** Zod validation bilan (haqiqat manbai)                                                           |
 | `constants/cliTools.ts`          | Tashqi CLI vositalari reestri                                                                                        |
 | `constants/routingStrategies.ts` | **20 marshrutlash strategiyasi** ustuvorliklar bilan                                                                 |
 | `constants/publicApiRoutes.ts`   | Bearer (boshqaruvga qarshi) autentsiyasi talab qilinadigan marshrutlar                                               |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — Oqimli uzatish mexanizmi ish maydoni
+## `open-sse/` — Streaming Engine Workspace
 
-Alohida npm ish maydoni (`@omniroute/open-sse`). Soʻrovlarni qayta ishlash va provayder bajarilishini boshqaradi.
+Alohida npm ish maydoni (`@omniroute/open-sse`). So'rovni qayta ishlash + provayderi bajarilishini boshqaradi.
 
 ```
 open-sse/
-├── handlers/            # 16 ta fayl (12 ta ishlov beruvchi + 4 ta yordamchi): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search va boshqalar.
-├── executors/           # 150 ta bajaruvchi modul (BaseExecutor’ni kengaytiruvchi klasslar + har bir provayder uchun yordamchilar)
-├── translator/          # Format konvertorlari (9 ta soʻrov, 9 ta javob, 9 ta yordamchi)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ ta xizmat moduli (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM va boshqalar)
-├── mcp-server/          # MCP serveri (110 ta vosita, 3 ta transport, 33 ta qamrov)
-├── config/              # Provayder/model registrlari, sarlavha konfiguratsiyasi, model taxalluslari
-├── utils/               # TLS mijozi, proksi fetch/dispatcher, tarmoq yordamchilari
-├── index.ts             # Ish maydonining kirish nuqtasi
-├── package.json         # Ish maydoni manifesti
-├── tsconfig.json        # Ish maydonining TS konfiguratsiyasi
-└── types.d.ts           # Ish maydoni turi deklaratsiyalari
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| Yoʻl                        | Maqsad                                                                                   |
-| --------------------------- | ---------------------------------------------------------------------------------------- |
-| `server.ts`                 | MCP serverining hayot sikli (stdio + HTTP transportlari)                                 |
-| `httpTransport.ts`          | HTTP Streamable + SSE transportlari (`/api/mcp/sse`, `/api/mcp/stream`)                  |
-| `audit.ts`                  | `mcp_tool_audit` jadvaliga audit jurnallarini yozish                                     |
-| `scopeEnforcement.ts`       | Har bir vosita uchun qamrovni tekshirish                                                 |
-| `runtimeHeartbeat.ts`       | `DATA_DIR/runtime/mcp-heartbeat.json` fayliga holat signalini yozish                     |
-| `descriptionCompressor.ts`  | Kontekstni tejash uchun vosita tavsifi metamaʼlumotlarini siqish                         |
-| `schemas/tools.ts`          | 36 ta asosiy vosita taʼrifi + qamrovlar                                                  |
-| `tools/advancedTools.ts`    | Kengaytirilgan vositalar implementatsiyasi                                               |
-| `tools/memoryTools.ts`      | 3 ta xotira vositasi (qidirish/qoʻshish/tozalash)                                        |
-| `tools/skillTools.ts`       | 4 ta koʻnikma vositasi (roʻyxat/yoqish/bajarish/bajarilishlar)                           |
-| `tools/compressionTools.ts` | 5 ta siqish vositasi                                                                     |
-| `README.md`                 | Ichki MCP serveri README fayli (`docs/frameworks/MCP-SERVER.md` bilan oʻzaro bogʻlangan) |
+| Yo'l                        | Maqsad                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `server.ts`                 | MCP server hayotiy tsikli (stdio + HTTP transports)                               |
+| `httpTransport.ts`          | HTTP Oqimli + SSE transportlari (`/api/mcp/sse`, `/api/mcp/stream`)               |
+| `audit.ts`                  | `mcp_tool_audit` jadvaliga ro'yxatdan o'tishni tekshirish                         |
+| `scopeEnforcement.ts`       | Har bir asbob doirasini tekshirish                                                |
+| `runtimeHeartbeat.ts`       | Salomatlik yurak urishi `DATA_DIR/runtime/mcp-heartbeat.json`                     |
+| `descriptionCompressor.ts`  | Kontekstni saqlash uchun asbob tavsifi metamaʼlumotlarini siqish                  |
+| `schemas/tools.ts`          | 36 ta asosiy vosita ta'riflari + doiralari                                        |
+| `tools/advancedTools.ts`    | Murakkab vositalarni amalga oshirish                                              |
+| `tools/memoryTools.ts`      | 3 ta xotira vositalari (search/add/clear)                                         |
+| `tools/skillTools.ts`       | 4 ta mahorat vositalari (list/enable/execute/executions)                          |
+| `tools/compressionTools.ts` | 5 ta siqish vositalari                                                            |
+| `README.md`                 | Ichki MCP serveri README ( `docs/frameworks/MCP-SERVER.md` dan oʻzaro bogʻlangan) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Tashqi CLI integratsiyalari + Ichki OmniRoute CLI                                                |
 | `I18N.md`                   | i18n arxitekturasi, til qoʻshish, 67 ta mahalliy til                                             |
 | `UNINSTALL.md`              | O'chirish bosqichlarini tozalang                                                                 |
-| `PROVIDER_REFERENCE.md`     | **Avtomatik yaratilgan** 381 ta provayderlar katalogi (regen: `npm run gen:provider-reference`)  |
+| `PROVIDER_REFERENCE.md`     | **Avtomatik yaratilgan** 389 ta provayderlar katalogi (regen: `npm run gen:provider-reference`)  |
 
 ### Quyi tizim chuqur sho'ng'idi
 
@@ -428,7 +428,7 @@ open-sse/
 | `EVALS.md`                                   | Baholash ramkasi (to'plamlar, yugurishlar, rubrikalar)                              |
 | `GUARDRAILS.md`                              | PII maskasi, tezkor in'ektsiya, ko'rish ko'prigi                                    |
 | `COMPLIANCE.md`                              | Audit jurnali, saqlash, noLog -dan voz kechish                                      |
-| `WEBHOOKS.md`                                | HMAC imzolangan veb-huk yetkazib berish                                             |
+| `WEBHOOKS.md`                                | HMAC imzosi bilan veb-huk yetkazib berish                                           |
 | `REASONING_REPLAY.md`                        | `reasoning_content` uchun gibrid memory/SQLite kesh                                 |
 | `AUTHZ_GUIDE.md`                             | Avtorizatsiya quvuri (`classify` → `policies` → `enforce`)                          |
 | `RESILIENCE_GUIDE.md`                        | O'chirish to'xtatuvchisi + sovutish + modeli blokirovkasi                           |
@@ -442,7 +442,7 @@ open-sse/
 | `COMPRESSION_GUIDE.md`          | Siqish rejimlarining umumiy ko'rinishi + yo'l xaritasi  |
 | `COMPRESSION_ENGINES.md`        | Caveman + RTK dvigatellari, ro'yxatga olish shartnomasi |
 | `COMPRESSION_RULES_FORMAT.md`   | G'or odami qoidalari to'plami JSON sxemasi              |
-| `COMPRESSION_LANGUAGE_PACKS.md` | Har bir til uchun qoidalar to'plami inventarizatsiyasi  |
+| `COMPRESSION_LANGUAGE_PACKS.md` | Har bir til uchun qoidalar toʻplami inventarizatsiyasi  |
 | `RTK_COMPRESSION.md`            | RTK deklarativ quvur liniyasi (56 filtr)                |
 
 ### Joylashtirish

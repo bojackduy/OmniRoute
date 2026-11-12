@@ -456,7 +456,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 babban matakin zartarwa modules (`*.ts` debe `base.ts`, `index.ts` da gwada — ƙidaya `npm run check:docs-counts` matakan). Kowane aji na zartarwa yana ƙara `BaseExecutor` (`base.ts`), kai tsaye ko ta hanyar `DefaultExecutor` ko wani mai zartarwa; ragowar kayayyaki sune mataimakan mai bayarwa (tsarin tsara kayan aiki, adaftar fetch/TTS, masu sarrafa quirk). Masu zartar da hukuncin sun hada da:
+170 babban matakin zartarwa modules (`*.ts` debe `base.ts`, `index.ts` da gwaje-gwaje — ƙidaya `npm run check:docs-counts` matakan). Kowane aji na zartarwa yana ƙara `BaseExecutor` (`base.ts`), kai tsaye ko ta hanyar `DefaultExecutor` ko wani mai zartarwa; ragowar kayayyaki sune mataimakan mai bayarwa (tsarin tsara kayan aiki, adaftar fetch/TTS, masu sarrafa quirk). Masu zartar da hukuncin sun hada da:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, plus `claudeIdentity.ts` (shared identity helper) and `index.ts` (registry).
 
-> Lura: Masu samar da ba a jera su anan ana yin su ta hanyar `default.ts` ta amfani da babban mai aiwatarwa na OpenAI mai jituwa. Cikakken kundin mai bada (masu samarwa 381) yana zaune a cikin `src/shared/constants/providers.ts`.
+> Lura: Masu samar da ba a jera su anan ana yin su ta hanyar `default.ts` ta amfani da babban mai aiwatarwa na OpenAI mai jituwa. Cikakken kundin mai bada (masu samarwa 389) yana zaune a cikin `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

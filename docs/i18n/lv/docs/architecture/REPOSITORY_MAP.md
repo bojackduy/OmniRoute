@@ -153,9 +153,9 @@ src/
 | `app/(dashboard)/dashboard/tools/agent-bridge/`                              | AgentBridge informācijas paneļa lapa — servera karte, 9 aģentu kartes, iestatīšanas vednis, modeļa kartēšana, apiešanas saraksts. i18n PT-BR + EN. Skatīt `docs/frameworks/AGENTBRIDGE.md`.                                                                                                                              |
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Satiksmes inspektora informācijas paneļa lapa — DevTools sadalīta, 7 detaļu cilnes, 4 tveršanas režīma pārslēgi, sesijas ierakstītājs, konteksta krāsošana. i18n PT-BR + EN. Skatīt `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                              |
 | `app/(dashboard)/dashboard/activity/`                                        | Darbību plūsmas lapa (B grupa): `page.tsx` (serveris) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — skatīt `docs/architecture/MONITORING_SECTIONS.md`                                                                                                            |
-| `app/(dashboard)/dashboard/costs/quota-share/`                               | Kvotu koplietošanas lapa (B grupa): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                          |
+| `app/(dashboard)/dashboard/costs/quota-share/`                               | Kvotas koplietošanas lapa (B grupa): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                         |
 | `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Pakalpojumu sniedzēja plāna konfigurācijas lapa (B grupa): `page.tsx` + `ProviderPlanConfigClient.tsx` — kvotas izmēri vienai savienojuma ignorēšanai                                                                                                                                                                    |
-| `app/docs/`                                                                  | Iegultās dokumentācijas skatītājs (renderē `docs/*.md`)                                                                                                                                                                                                                                                                  |
+| `app/docs/`                                                                  | Iegultais dokumentācijas skatītājs (renderē `docs/*.md`)                                                                                                                                                                                                                                                                 |
 | `app/landing/`                                                               | Mārketinga galvenā lapa                                                                                                                                                                                                                                                                                                  |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | Ar autentifikāciju saistītas lapas                                                                                                                                                                                                                                                                                       |
 | `app/{400,401,403,408,429,500,502,503}/`                                     | HTTP kļūdu lapas                                                                                                                                                                                                                                                                                                         |
@@ -169,7 +169,7 @@ src/
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `a2a/`                                   | A2A protokola uzdevumu vadītājs, prasmes (5), straumēšana                                                                                                                                                                                                                                                                             |
 | `acp/`                                   | CLI aģentu reģistrs (vietējais CLI atklājums — skatiet `docs/frameworks/AGENT_PROTOCOLS_GUIDE.md`)                                                                                                                                                                                                                                    |
-| `api/`                                   | Kopīgi API palīgi (`requireManagementAuth`, validācija)                                                                                                                                                                                                                                                                               |
+| `api/`                                   | Kopīgie API palīgi (`requireManagementAuth`, validācija)                                                                                                                                                                                                                                                                              |
 | `auth/`                                  | Sesija, paroles jaukšana, marķiera validācija                                                                                                                                                                                                                                                                                         |
 | `batches/`                               | OpenAI Partijas API manipulatori                                                                                                                                                                                                                                                                                                      |
 | `catalog/`                               | Pakalpojumu sniedzēju katalogs Zod validācijas + iespēju izšķirtspēja                                                                                                                                                                                                                                                                 |
@@ -191,7 +191,7 @@ src/
 | `memory/`                                | Sarunu atmiņa (SQLite FTS5 + sqlite-vec hibrīds RRF + Qdrant 2. līmenis) — skatīt `docs/frameworks/MEMORY.md`                                                                                                                                                                                                                         |
 | `memory/embedding/`                      | Vairāku avotu iegulšanas slānis: `index.ts` (atrisinātājs), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (21. plāns)                                                                                                                                                                                |
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 iesaiņojums — KNN brutālā spēka + hibrīds RRF (FTS5 + vektors, k = 60). Lazy-init, graciozi degradējas, kad sqlite-vec nav pieejams. (21. plāns)                                                                                                                                                                    |
-| `memory/reindex.ts`                      | `runReindexBatch()` — apstrādā atmiņas ar `needs_reindex=1` fonā; izsauc `POST /api/memory/reindex` un lazy-backfill path. (21. plāns)                                                                                                                                                                                                |
+| `memory/reindex.ts`                      | `runReindexBatch()` — apstrādā atmiņas ar `needs_reindex=1` fonā; izsauc `POST /api/memory/reindex` un lazy-backfill ceļš. (21. plāns)                                                                                                                                                                                                |
 | `monitoring/`                            | Veselības pārbaudes, metrikas emisijas                                                                                                                                                                                                                                                                                                |
 | `oauth/`                                 | OAuth/import plūsmas 22 nodrošinātāja moduļiem (agy, antigravity, claude, cline, codebuddy-cn, codex, kursors, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, traqa, open-ference, traqaio, zed-hosted, zed)                                                                        |
 | `plugins/`                               | Spraudņu reģistrs                                                                                                                                                                                                                                                                                                                     |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Informācijas paneļa komponents API: `packages/ui-kit` adapteri — skatiet `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ikonu nosaukumi , ko izmanto ekrāni → Lucide komponenti (`<Icon>`)                                |
-| `constants/providers.ts`         | **381 pakalpojumu sniedzējs** ar Zod apstiprinājumu (patiesības avots)                                        |
+| `constants/providers.ts`         | **389 pakalpojumu sniedzēji** ar Zod apstiprinājumu (patiesības avots)                                        |
 | `constants/cliTools.ts`          | Ārējais CLI rīku reģistrs                                                                                     |
 | `constants/routingStrategies.ts` | **20 maršrutēšanas stratēģijas** ar prioritātēm                                                               |
 | `constants/publicApiRoutes.ts`   | Maršruti, kuriem nepieciešama nesēja (pret vadību) autentifikācija                                            |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — Straumēšanas dzinēja darbvieta
+## `open-sse/` — straumēšanas dzinēja darbvieta
 
-Atsevišķa npm darbvieta (`@omniroute/open-sse`). Apstrādā pieprasījumus un nodrošinātāju izpildi.
+Atsevišķa npm darbvieta (`@omniroute/open-sse`). Apstrādā pieprasījumu apstrādes + nodrošinātāja izpildi.
 
 ```
 open-sse/
-├── handlers/            # 16 faili (12 apstrādātāji + 4 palīgmoduļi): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search u.c.
-├── executors/           # 150 izpildītāju moduļi (klases, kas paplašina BaseExecutor, + katram nodrošinātājam paredzēti palīgmoduļi)
-├── translator/          # Formātu pārveidotāji (9 pieprasījumu, 9 atbilžu, 9 palīgmoduļi)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ pakalpojumu moduļi (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM u.c.)
-├── mcp-server/          # MCP serveris (110 rīki, 3 transporti, 33 tvērumi)
-├── config/              # Nodrošinātāju/modeļu reģistri, galveņu konfigurācija, modeļu aizstājvārdi
-├── utils/               # TLS klients, starpniekservera fetch/dispatcher, tīkla palīgmoduļi
-├── index.ts             # Darbvietas ieejas punkts
-├── package.json         # Darbvietas manifests
-├── tsconfig.json        # Darbvietas TS konfigurācija
-└── types.d.ts           # Darbvietas tipu deklarācijas
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| Ceļš                        | Nolūks                                                                                 |
-| --------------------------- | -------------------------------------------------------------------------------------- |
-| `server.ts`                 | MCP servera dzīves cikls (stdio + HTTP transporti)                                     |
-| `httpTransport.ts`          | HTTP Streamable + SSE transporti (`/api/mcp/sse`, `/api/mcp/stream`)                   |
-| `audit.ts`                  | Audita žurnālu ierakstīšana tabulā `mcp_tool_audit`                                    |
-| `scopeEnforcement.ts`       | Katra rīka tvēruma validācija                                                          |
-| `runtimeHeartbeat.ts`       | Veselības stāvokļa pulsa signāls uz `DATA_DIR/runtime/mcp-heartbeat.json`              |
-| `descriptionCompressor.ts`  | Rīku aprakstu metadatu saspiešana konteksta taupīšanai                                 |
-| `schemas/tools.ts`          | 36 pamata rīku definīcijas + tvērumi                                                   |
-| `tools/advancedTools.ts`    | Paplašināto rīku implementācijas                                                       |
-| `tools/memoryTools.ts`      | 3 atmiņas rīki (search/add/clear)                                                      |
-| `tools/skillTools.ts`       | 4 prasmju rīki (list/enable/execute/executions)                                        |
-| `tools/compressionTools.ts` | 5 saspiešanas rīki                                                                     |
-| `README.md`                 | Iekšējais MCP servera README (ar savstarpēju saiti no `docs/frameworks/MCP-SERVER.md`) |
+| Ceļš                        | Mērķis                                                                       |
+| --------------------------- | ---------------------------------------------------------------------------- |
+| `server.ts`                 | MCP servera dzīves cikls (stdio + HTTP transports)                           |
+| `httpTransport.ts`          | HTTP straumējams + SSE transports (`/api/mcp/sse`, `/api/mcp/stream`)        |
+| `audit.ts`                  | Audita reģistrēšana `mcp_tool_audit` tabulā                                  |
+| `scopeEnforcement.ts`       | Katra rīka darbības jomas validācija                                         |
+| `runtimeHeartbeat.ts`       | Veselības sirdsdarbība uz `DATA_DIR/runtime/mcp-heartbeat.json`              |
+| `descriptionCompressor.ts`  | Saspiest rīka apraksta metadatus, lai saglabātu kontekstu                    |
+| `schemas/tools.ts`          | 36 bāzes rīku definīcijas + tvērumi                                          |
+| `tools/advancedTools.ts`    | Uzlabotas rīku ieviešanas                                                    |
+| `tools/memoryTools.ts`      | 3 atmiņas rīki (search/add/clear)                                            |
+| `tools/skillTools.ts`       | 4 prasmju rīki (list/enable/execute/executions)                              |
+| `tools/compressionTools.ts` | 5 kompresijas instrumenti                                                    |
+| `README.md`                 | Iekšējais MCP serveris README (savienots no `docs/frameworks/MCP-SERVER.md`) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Ārējās CLI integrācijas + Iekšējās OmniRoute CLI                                                      |
 | `I18N.md`                   | i18n arhitektūra, pievienojot valodu, 67 lokalizācijas                                                |
 | `UNINSTALL.md`              | Notīriet atinstalēšanas darbības                                                                      |
-| `PROVIDER_REFERENCE.md`     | **Automātiski ģenerēts** 381 pakalpojumu sniedzēja katalogs (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Automātiski ģenerēts** 389 pakalpojumu sniedzēju katalogs (regen: `npm run gen:provider-reference`) |
 
 ### Apakšsistēmas dziļi niršana
 

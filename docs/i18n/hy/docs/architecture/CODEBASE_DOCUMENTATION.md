@@ -456,7 +456,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 վերին մակարդակի կատարող մոդուլներ (`*.ts` մինուս `base.ts`, `index.ts` և թեստեր — `npm run check:docs-counts` ի հաշվարկը): Յուրաքանչյուր կատարողի դաս ընդլայնում է `BaseExecutor` (`base.ts`) ուղղակիորեն կամ `DefaultExecutor` կամ մեկ այլ կատարողի միջոցով; մնացած մոդուլները յուրաքանչյուր մատակարարի օգնականներ են (գործիքների սխեմաներ, fetch/TTS ադապտերներ, տարօրինակ մշակիչներ): Կատարողները ներառում են.
+170 վերին մակարդակի կատարող մոդուլ (`*.ts` մինուս `base.ts`, `index.ts` և թեստեր — `npm run check:docs-counts` ի հաշվառումը): Յուրաքանչյուր կատարողի դաս ընդլայնում է `BaseExecutor` (`base.ts`) ուղղակիորեն կամ `DefaultExecutor` կամ մեկ այլ կատարողի միջոցով; մնացած մոդուլները յուրաքանչյուր մատակարարի օգնականներ են (գործիքների սխեմաներ, fetch/TTS ադապտերներ, տարօրինակ մշակիչներ): Կատարողները ներառում են.
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder` `devin-desktop` `vertex` `claudeIdentity.ts` պլյուս (ընդհանուր) օգնական `index.ts`
 
-> Նշում․ այստեղ չնշված մատակարարները սպասարկվում են `default.ts` կողմից՝ օգտագործելով ընդհանուր OpenAI-ի հետ համատեղելի կատարողը: Պրովայդերների ամբողջական կատալոգը (381 մատակարար) ապրում է `src/shared/constants/providers.ts` ում:
+> Նշում․ այստեղ չնշված մատակարարները սպասարկվում են `default.ts` կողմից՝ օգտագործելով ընդհանուր OpenAI-ի հետ համատեղելի կատարողը: Պրովայդերների ամբողջական կատալոգը (389 մատակարար) ապրում է `src/shared/constants/providers.ts` ում:
 
 ### 4.3 `open-sse/translator/`
 
@@ -530,7 +530,7 @@ Hub-and-spoke թարգմանություն (OpenAI հանգույցն է):
 
 - **110 եզակի գործիքներ** լարված `server.ts` ում (45 կանոնական `schemas/tools.ts` + հիշողության մեջ, հմտություններ, GitHub-skills, pool, gamification, plugin, Notion, Obsidian, local-corpus և compression մոդուլներ — միավորում, հաշվված `countUniqueMcpTools` ով):
 - **3 տրանսպորտ** : stdio, HTTP Streamable, SSE.
-- **33 շրջանակ** ուժի մեջ է մտել գործարկման ժամանակ — բազային ցուցակում `src/shared/constants/mcpScopes.ts` ում, ամբողջական հավաքածուն յուրաքանչյուր գործիքի մոդուլի կողմից հայտարարված շրջանակների միավորումն է:
+- **33 շրջանակ** ուժի մեջ է մտել գործարկման ժամանակ — բազային ցուցակում `src/shared/constants/mcpScopes.ts` ում, ամբողջական փաթեթը յուրաքանչյուր գործիքի մոդուլի կողմից հայտարարված շրջանակների միավորումն է:
 - Աուդիտի աղյուսակ. `mcp_tool_audit` (բնակեցված `audit.ts`):
 - Ֆայլեր՝ `server.ts`, `index.ts`, `httpTransport.ts`, `audit.ts`, `scopeEnforcement.ts`, `runtimeHeartbeat.ts`, `descriptionCompressor.ts`, `schemas/{tools, a2a, audit, index}.ts`, `tools/{advancedTools, compressionTools, memoryTools, skillTools}.ts`, գումարած թեստեր `__tests__/`.
 - Տես [MCP-SERVER.md](../frameworks/MCP-SERVER.md) գործիքների ամբողջական կատալոգի համար:

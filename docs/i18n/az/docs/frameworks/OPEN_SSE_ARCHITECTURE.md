@@ -488,7 +488,7 @@ Bu, aşağıdakıları emal edir:
 
 | Fayl                          | Məqsəd                                                |
 | ----------------------------- | ----------------------------------------------------- |
-| `providerRegistry.ts`         | 381-provayder kataloqu üzərində söhbət modeli reyestr |
+| `providerRegistry.ts`         | 389-provayder kataloqu üzərində söhbət modeli reyestr |
 | `providerModels.ts`           | Model ləqəbləri, formatın xəritəsi                    |
 | `constants.ts`                | Taymoutlar, limitlər, status kodları                  |
 | `defaultThinkingSignature.ts` | Defolt Claude düşüncə imzası                          |

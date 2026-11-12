@@ -456,7 +456,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 उच्च-स्तरीय एक्झिक्युटर मॉड्यूल्स (`*.ts` वजा `base.ts`, `index.ts` आणि चाचण्या — `npm run check:docs-counts` मोजणी मोजतात). प्रत्येक एक्झिक्युटर वर्ग `BaseExecutor` (`base.ts`), थेट किंवा `DefaultExecutor` किंवा अन्य एक्झिक्युटरद्वारे विस्तारित करतो; उर्वरित मॉड्यूल प्रति-प्रदाता मदतनीस आहेत (टूल स्कीमा, fetch/TTS अडॅप्टर, क्विर्क हँडलर). एक्झिक्युटरमध्ये हे समाविष्ट आहे:
+170 उच्च-स्तरीय एक्झिक्युटर मॉड्यूल (`*.ts` वजा `base.ts`, `index.ts` आणि चाचण्या — `npm run check:docs-counts` मोजणी मोजतात). प्रत्येक एक्झिक्युटर वर्ग `BaseExecutor` (`base.ts`), थेट किंवा `DefaultExecutor` किंवा अन्य एक्झिक्युटरद्वारे विस्तारित करतो; उर्वरित मॉड्यूल प्रति-प्रदाता मदतनीस आहेत (टूल स्कीमा, fetch/TTS अडॅप्टर, क्विर्क हँडलर). एक्झिक्युटरमध्ये हे समाविष्ट आहे:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, अधिक `devin-desktop`(शेअर आयडेंटिटी हेल्पर) आणि `claudeIdentity.ts` ( `index.ts` ).
 
-> टीप: येथे सूचीबद्ध नसलेले प्रदाते जेनेरिक OpenAI- सुसंगत एक्झिक्युटर वापरून `default.ts` द्वारे सर्व्ह केले जातात. संपूर्ण प्रदाता कॅटलॉग (381 प्रदाता) `src/shared/constants/providers.ts` मध्ये राहतात.
+> टीप: येथे सूचीबद्ध नसलेले प्रदाते जेनेरिक OpenAI- सुसंगत एक्झिक्युटर वापरून `default.ts` द्वारे सर्व्ह केले जातात. संपूर्ण प्रदाता कॅटलॉग (389 प्रदाता) `src/shared/constants/providers.ts` मध्ये राहतात.
 
 ### 4.3 `open-sse/translator/`
 
@@ -530,7 +530,7 @@ open-sse/
 
 - **110 अद्वितीय साधने** `server.ts` मध्ये वायर्ड ( `schemas/tools.ts` + मेमरी, कौशल्य, GitHub-कौशल्य, पूल, गेमिफिकेशन, प्लगइन, Notion, Obsidian, स्थानिक-कॉर्पस आणि कॉम्प्रेशन मॉड्यूल — युनियन `countUniqueMcpTools` द्वारे मोजले जाणारे 45 कॅनोनिकल).
 - **3 वाहतूक** : stdio, HTTP स्ट्रीम करण्यायोग्य, SSE.
-- **33 स्कोप** `src/shared/constants/mcpScopes.ts` मधील रनटाइम — बेस लिस्टवर लागू केले जाते, पूर्ण सेट म्हणजे प्रत्येक टूल मॉड्यूलद्वारे घोषित केलेल्या स्कोपचे संघटन.
+- **33 स्कोप** `src/shared/constants/mcpScopes.ts` मध्ये रनटाइम — बेस लिस्टवर लागू केले जाते, पूर्ण सेट म्हणजे प्रत्येक टूल मॉड्यूलद्वारे घोषित केलेल्या स्कोपचे युनियन.
 - लेखापरीक्षण सारणी: `mcp_tool_audit` ( `audit.ts` द्वारे पॉप्युलेट केलेले).
 - फाइल्स: `server.ts`, `index.ts`, `httpTransport.ts`, `audit.ts`, `scopeEnforcement.ts`, `runtimeHeartbeat.ts`, `descriptionCompressor.ts`, `schemas/{tools, a2a, audit, index}.ts`, `tools/{advancedTools, compressionTools, memoryTools, skillTools}.ts`, अधिक `__tests__/` अंतर्गत चाचण्या.
 - संपूर्ण टूल कॅटलॉगसाठी [MCP-SERVER.md](../frameworks/MCP-SERVER.md) पहा.

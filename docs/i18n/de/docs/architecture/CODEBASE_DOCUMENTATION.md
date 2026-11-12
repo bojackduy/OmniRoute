@@ -455,7 +455,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -485,11 +485,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 Executor-Module der obersten Ebene (`*.ts` minus `base.ts`, `index.ts` und testet — die Anzahl `npm run check:docs-counts` misst). Jede Executor-Klasse erweitert `BaseExecutor` (`base.ts`), direkt oder über `DefaultExecutor` oder einen anderen Executor; Die übrigen Module sind pro-Provider-Helfer (Tool-Schemata, fetch/TTS Adapter, Quirk-Handler). Zu den Testamentsvollstreckern zählen:
+170 Executor-Module der obersten Ebene (`*.ts` minus `base.ts`, `index.ts` und testet — die Anzahl `npm run check:docs-counts` misst). Jede Executor-Klasse erweitert `BaseExecutor` (`base.ts`), direkt oder über `DefaultExecutor` oder einen anderen Executor; Die übrigen Module sind pro-Provider-Helfer (Tool-Schemata, fetch/TTS Adapter, Quirk-Handler). Zu den Testamentsvollstreckern zählen:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop` sowie `claudeIdentity.ts` (Shared Identity Helper) und `index.ts` (Registrierung).
 
-> Hinweis: Hier nicht aufgeführte Anbieter werden von `default.ts` mit dem generischen OpenAI-kompatiblen Executor bedient. Der vollständige Anbieterkatalog (381 Anbieter) befindet sich in `src/shared/constants/providers.ts`.
+> Hinweis: Hier nicht aufgeführte Anbieter werden von `default.ts` mit dem generischen OpenAI-kompatiblen Executor bedient. Der vollständige Anbieterkatalog (389 Anbieter) befindet sich in `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

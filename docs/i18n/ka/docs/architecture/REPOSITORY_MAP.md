@@ -143,7 +143,7 @@ src/
 | `app/api/v1beta/`                                                            | ტყუპების სტილის API ბოლო წერტილები                                                                                                                                                                                                                                                                                              |
 | `app/api/playground/`                                                        | Playground Studio მარშრუტები: `improve-prompt/` (POST — LLM სწრაფი გადამწერი), `presets/` (GET სია / POST შექმნა), `presets/[id]/` (GET / PUT / DELETE) — იხილეთ `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                                                         |
 | `app/api/` (non-v1)                                                          | Management/admin მარშრუტები (~ 60 დირექტორიები: პროვაიდერები, კომბინაციები, პარამეტრები, mcp, a2a, evals, მეხსიერება, უნარები, ვებჰუკები, შესაბამისობა, გამძლეობა, მონიტორინგი, გვირაბები, cli-ინსტრუმენტები და ა.შ.)                                                                                                           |
-| `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 მარშრუტი (სერვერის კონტროლი, აგენტი state/DNS/mappings, შემოვლითი გზა, სერთიფიკატი, ზემო დინებაში-CA). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/AGENTBRIDGE.md §7`.                                                                                                                        |
+| `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 მარშრუტი (სერვერის კონტროლი, აგენტი state/DNS/mappings, შემოვლითი გზა, სერტიფიკატი, ზემო დინებაში-CA). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/AGENTBRIDGE.md §7`.                                                                                                                        |
 | `app/api/tools/traffic-inspector/`                                           | Traffic Inspector REST + WS API — 16 + მარშრუტი (მოთხოვნები, სესიები, მასპინძლები, გადაღების რეჟიმი, ექსპორტი, ws). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                                               |
 | `app/a2a/`                                                                   | A2A JSON-RPC 2.0 შესვლის წერტილი (`POST /a2a`)                                                                                                                                                                                                                                                                                  |
 | `app/.well-known/agent.json/`                                                | A2A აგენტის ბარათი (აღმოჩენა)                                                                                                                                                                                                                                                                                                   |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `components/`                    | დაფის კომპონენტი API: ადაპტერები `packages/ui-kit` — ზე იხილეთ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ეკრანის მიერ გამოყენებული ხატების სახელები → Lucide კომპონენტები (`<Icon>`)             |
-| `constants/providers.ts`         | **381 პროვაიდერი** Zod დადასტურებით (სიმართლის წყარო)                                               |
+| `constants/providers.ts`         | **389 პროვაიდერი** Zod დადასტურებით (სიმართლის წყარო)                                               |
 | `constants/cliTools.ts`          | გარე CLI ინსტრუმენტის რეესტრი                                                                       |
 | `constants/routingStrategies.ts` | **20 მარშრუტიზაციის სტრატეგია** პრიორიტეტებით                                                       |
 | `constants/publicApiRoutes.ts`   | მარშრუტები, რომლებიც საჭიროებენ Bearer (მმართველობის წინააღმდეგ) ავტორიზაციას                       |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — სტრიმინგის ძრავის სამუშაო სივრცე
+## `open-sse/` — Streaming Engine Workspace
 
-ცალკე npm სამუშაო სივრცე (`@omniroute/open-sse`). უზრუნველყოფს მოთხოვნების დამუშავებასა და პროვაიდერების შესრულებას.
+ცალკე npm სამუშაო ადგილი (`@omniroute/open-sse`). ამუშავებს მოთხოვნის დამუშავებას + პროვაიდერის შესრულებას.
 
 ```
 open-sse/
-├── handlers/            # 16 ფაილი (12 დამმუშავებელი + 4 დამხმარე): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search და სხვ.
-├── executors/           # 150 შემსრულებელი მოდული (კლასები, რომლებიც აფართოებენ BaseExecutor-ს + თითოეული პროვაიდერის დამხმარეები)
-├── translator/          # ფორმატის კონვერტერები (9 მოთხოვნისთვის, 9 პასუხისთვის, 9 დამხმარე)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ სერვისის მოდული (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM და სხვ.)
-├── mcp-server/          # MCP სერვერი (110 ხელსაწყო, 3 ტრანსპორტი, 33 წვდომის არე)
-├── config/              # პროვაიდერების/მოდელების რეესტრები, სათაურების კონფიგურაცია, მოდელების ფსევდონიმები
-├── utils/               # TLS კლიენტი, პროქსი fetch/dispatcher, ქსელის დამხმარეები
-├── index.ts             # სამუშაო სივრცის შესასვლელი წერტილი
-├── package.json         # სამუშაო სივრცის მანიფესტი
-├── tsconfig.json        # სამუშაო სივრცის TS კონფიგურაცია
-└── types.d.ts           # სამუშაო სივრცის ტიპების დეკლარაციები
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| გზა                         | დანიშნულება                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------- |
-| `server.ts`                 | MCP სერვერის სასიცოცხლო ციკლი (stdio + HTTP ტრანსპორტები)                       |
-| `httpTransport.ts`          | HTTP Streamable + SSE ტრანსპორტები (`/api/mcp/sse`, `/api/mcp/stream`)          |
-| `audit.ts`                  | აუდიტის ჟურნალის წარმოება `mcp_tool_audit` ცხრილში                              |
-| `scopeEnforcement.ts`       | წვდომის არეების შემოწმება თითოეული ხელსაწყოსთვის                                |
-| `runtimeHeartbeat.ts`       | მდგომარეობის პერიოდული სიგნალი `DATA_DIR/runtime/mcp-heartbeat.json`-ში         |
-| `descriptionCompressor.ts`  | კონტექსტის დასაზოგად ხელსაწყოს აღწერის მეტამონაცემების შეკუმშვა                 |
-| `schemas/tools.ts`          | 36 საბაზისო ხელსაწყოს განსაზღვრება + წვდომის არეები                             |
-| `tools/advancedTools.ts`    | გაფართოებული ხელსაწყოების იმპლემენტაციები                                       |
-| `tools/memoryTools.ts`      | მეხსიერების 3 ხელსაწყო (ძებნა/დამატება/გასუფთავება)                             |
-| `tools/skillTools.ts`       | უნარების 4 ხელსაწყო (სია/ჩართვა/შესრულება/შესრულებების ისტორია)                 |
-| `tools/compressionTools.ts` | შეკუმშვის 5 ხელსაწყო                                                            |
-| `README.md`                 | MCP სერვერის შიდა README (`docs/frameworks/MCP-SERVER.md`-დან ჯვარედინი ბმულით) |
+| ბილიკი                      | მიზანი                                                                        |
+| --------------------------- | ----------------------------------------------------------------------------- |
+| `server.ts`                 | MCP სერვერის სასიცოცხლო ციკლი (stdio + HTTP transports)                       |
+| `httpTransport.ts`          | HTTP Streamable + SSE ტრანსპორტი (`/api/mcp/sse`, `/api/mcp/stream`)          |
+| `audit.ts`                  | აუდიტის აღრიცხვა `mcp_tool_audit` მაგიდაზე                                    |
+| `scopeEnforcement.ts`       | თითო ხელსაწყოს მასშტაბის ვალიდაცია                                            |
+| `runtimeHeartbeat.ts`       | ჯანმრთელობის გულისცემა `DATA_DIR/runtime/mcp-heartbeat.json`                  |
+| `descriptionCompressor.ts`  | შეკუმშოს ხელსაწყოს აღწერილობის მეტამონაცემები კონტექსტის შესანახად            |
+| `schemas/tools.ts`          | 36 საბაზისო ხელსაწყოს განმარტება + სფეროებში                                  |
+| `tools/advancedTools.ts`    | ხელსაწყოების გაფართოებული დანერგვა                                            |
+| `tools/memoryTools.ts`      | 3 მეხსიერების ინსტრუმენტი (search/add/clear)                                  |
+| `tools/skillTools.ts`       | 4 უნარის ინსტრუმენტი (list/enable/execute/executions)                         |
+| `tools/compressionTools.ts` | 5 შეკუმშვის ინსტრუმენტი                                                       |
+| `README.md`                 | შიდა MCP სერვერი README (ჯვარედინი ბმული `docs/frameworks/MCP-SERVER.md` დან) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | გარე CLI ინტეგრაციები + შიდა OmniRoute CLI                                                       |
 | `I18N.md`                   | i18n არქიტექტურა, ენის დამატება, 67 ლოკალი                                                       |
 | `UNINSTALL.md`              | დეინსტალაციის ნაბიჯების გასუფთავება                                                              |
-| `PROVIDER_REFERENCE.md`     | **ავტომატურად გენერირებული** 381 პროვაიდერის კატალოგი (რეგენი: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ავტომატურად გენერირებული** 389 პროვაიდერის კატალოგი (რეგენი: `npm run gen:provider-reference`) |
 
 ### ღრმა ჩაყვინთვის ქვესისტემა
 
@@ -450,7 +450,7 @@ open-sse/
 | დოქ                          | მიზანი                                                             |
 | ---------------------------- | ------------------------------------------------------------------ |
 | `DOCKER_GUIDE.md`            | Docker build, პროფილები (base/cli/host/cliproxyapi), Redis sidecar |
-| `VM_DEPLOYMENT_GUIDE.md`     | ზოგადი VM/VPS განლაგება (Ubuntu/Debian + nginx + systemd)          |
+| `VM_DEPLOYMENT_GUIDE.md`     | ზოგადი VM/VPS დანერგვა (Ubuntu/Debian + nginx + systemd)           |
 | `FLY_IO_DEPLOYMENT_GUIDE.md` | Fly.io განლაგება (ამჟამად მხოლოდ ჩინური)                           |
 | `TERMUX_GUIDE.md`            | ანდროიდი უთავო Termux-ის საშუალებით                                |
 | `PWA_GUIDE.md`               | პროგრესული ვებ აპლიკაციის ინსტალაცია + სერვისის მუშაკი             |
@@ -460,11 +460,11 @@ open-sse/
 
 ### ქვედირექტორიები
 
-| ქვედირეჟი             | მიზანი                                                                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/i18n/`          | დოკუმენტების ლოკალიზებული თარგმანი (41 ლოკალი)                                                                                                                                                    |
-| `docs/screenshots/`   | გამოსახულების აქტივები გიდებისთვის                                                                                                                                                                |
-| `_tasks/superpowers/` | Plans/specs ზესახელმწიფოებიდან (`writing-plans`/`brainstorming`) + კვლევა — იზოლირებული, ცალკე ვერსიით რეპო, იგნორირებული მთავარი ხის მიერ. იხილეთ CLAUDE.md → "დაგეგმვა და კვლევის არტეფაქტები". |
+| ქვედირეჟი             | მიზანი                                                                                                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/i18n/`          | დოკუმენტების ლოკალიზებული თარგმანი (41 ლოკალი)                                                                                                                                                     |
+| `docs/screenshots/`   | გამოსახულების აქტივები გიდებისთვის                                                                                                                                                                 |
+| `_tasks/superpowers/` | Plans/specs ზესახელმწიფოებიდან (`writing-plans`/`brainstorming`) + კვლევის — იზოლირებული, ცალკე ვერსიით რეპო, იგნორირებული მთავარი ხის მიერ. იხილეთ CLAUDE.md → "დაგეგმვა და კვლევის არტეფაქტები". |
 
 ---
 

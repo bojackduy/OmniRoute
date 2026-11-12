@@ -486,13 +486,13 @@ Detta hanterar:
 
 `open-sse/config/` innehåller konfigurationslagret:
 
-| Fil                           | Ändamål                                           |
-| ----------------------------- | ------------------------------------------------- |
-| `providerRegistry.ts`         | Chattmodellregister över 381-leverantörskatalogen |
-| `providerModels.ts`           | Modellalias, formatmappning                       |
-| `constants.ts`                | Timeouts, gränser, statuskoder                    |
-| `defaultThinkingSignature.ts` | Standard Claude tänkande signatur                 |
-| `modelStrip.ts` (i tjänster)  | Fältstrippning per leverantör                     |
+| Fil                           | Ändamål                                            |
+| ----------------------------- | -------------------------------------------------- |
+| `providerRegistry.ts`         | Chattmodellregistret över 389-leverantörskatalogen |
+| `providerModels.ts`           | Modellalias, formatmappning                        |
+| `constants.ts`                | Timeouts, gränser, statuskoder                     |
+| `defaultThinkingSignature.ts` | Standard Claude tänkande signatur                  |
+| `modelStrip.ts` (i tjänster)  | Fältstrippning per leverantör                      |
 
 ### Providers registerschema
 

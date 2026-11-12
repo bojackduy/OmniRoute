@@ -456,7 +456,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 ထိပ်တန်းအဆင့် executor modules (`*.ts` အနှုတ် `base.ts`၊ `index.ts` နှင့် စမ်းသပ်မှုများ — အရေအတွက် `npm run check:docs-counts` အစီအမံများ)။ executor အတန်းတိုင်းသည် `BaseExecutor` (`base.ts`) ကို တိုက်ရိုက် သို့မဟုတ် `DefaultExecutor` သို့မဟုတ် အခြားသော executor မှတဆင့် တိုးချဲ့သည်။ ကျန်ရှိသော module များသည် per-provider helpers (tool schemas၊ fetch/TTS adapters၊ quirk handlers) များဖြစ်သည်။ စီမံဆောင်ရွက်သူများ ပါဝင်သည်-
+ထိပ်တန်းအဆင့် executor module 170 (`*.ts` အနှုတ် `base.ts`၊ `index.ts` နှင့် စမ်းသပ်မှုများ — အရေအတွက် `npm run check:docs-counts` အစီအမံများ)။ executor အတန်းတိုင်းသည် `BaseExecutor` (`base.ts`) ကို တိုက်ရိုက် သို့မဟုတ် `DefaultExecutor` သို့မဟုတ် အခြားသော executor မှတဆင့် တိုးချဲ့သည်။ ကျန်ရှိသော module များသည် per-provider helpers (tool schemas၊ fetch/TTS adapters၊ quirk handlers) များဖြစ်သည်။ စီမံဆောင်ရွက်သူများ ပါဝင်သည်-
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, `claudeIdentity.ts` (အကူအညီ) နှင့် `index.ts`
 
-> မှတ်ချက်- ဤနေရာတွင် စာရင်းမသွင်းထားသော ဝန်ဆောင်မှုပေးသူများကို ယေဘူယျ OpenAI-သဟဇာတဖြစ်သော executor ကို အသုံးပြု၍ `default.ts` မှ ဆောင်ရွက်ပေးပါသည်။ ဝန်ဆောင်မှုပေးသူ ကတ်တလောက် အပြည့်အစုံ (381 ဝန်ဆောင်မှုပေးသူ) သည် `src/shared/constants/providers.ts` တွင် နေထိုင်သည်။
+> မှတ်ချက်- ဤနေရာတွင် စာရင်းမသွင်းထားသော ဝန်ဆောင်မှုပေးသူများကို ယေဘူယျ OpenAI-သဟဇာတဖြစ်သော executor ကို အသုံးပြု၍ `default.ts` မှ ဆောင်ရွက်ပေးပါသည်။ ဝန်ဆောင်မှုပေးသူ ကတ်တလောက် အပြည့်အစုံ (389 ဝန်ဆောင်မှုပေးသူ) သည် `src/shared/constants/providers.ts` တွင် နေထိုင်သည်။
 
 ### 4.3 `open-sse/translator/`
 
@@ -541,7 +541,7 @@ Hub-and-spoke ဘာသာပြန်ဆိုချက် (OpenAI သည် �
 
 ### 4.8 `open-sse/utils/`
 
-ထုတ်လွှ `thinkTagParser.ts`် `awsSigV4.ts` `tlsClient.ts` `stream.ts` `streamHandler.ts` `streamHelpers.ts` `streamPayloadCollector.ts` `streamReadiness.ts` `sseHeartbeat.ts` `proxyFetch.ts` `proxyDispatcher.ts` `networkProxy.ts` `cacheControlPolicy.ts` `cursorChecksum.ts` `cursorAgentProtobuf.ts` `cursorVersionDetector.ts` `comfyuiClient.ts` `kieTask.ts` `bypassHandler.ts` `aiSdkCompat.ts`, `urlSanitize.ts`, `usageTracking.ts`, `requestLogger.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
+ထုတ်လွှင့်ခြင်း `tlsClient.ts` အခြေခံများနှင့် ပံ့ပိုးပေးသူများ- `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts`, `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `requestLogger.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
 
 ---
 

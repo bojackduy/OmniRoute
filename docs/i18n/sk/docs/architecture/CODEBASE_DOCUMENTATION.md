@@ -456,7 +456,7 @@ open-sse/
 ├── types.d.ts
 ├── config/                 Provider registries, header profiles, identity, …
 ├── handlers/               Request handlers (chat, embeddings, audio, image, …)
-├── executors/              159 provider executor modules (executor classes + per-provider helpers)
+├── executors/              170 provider executor modules (executor classes + per-provider helpers)
 ├── translator/             Format conversion (OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro)
 ├── transformer/            Responses API ↔ Chat Completions stream transformer
 ├── services/               80+ service modules (combos, fallback, quotas, identity, …)
@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 modulov spúšťača najvyššej úrovne (`*.ts` mínus `base.ts`, `index.ts` a testuje — počet meraní `npm run check:docs-counts` ). Každá trieda exekútorov rozširuje `BaseExecutor` (`base.ts`), priamo alebo prostredníctvom `DefaultExecutor` alebo iného exekútora; zostávajúce moduly sú pomocníkmi pre jednotlivých poskytovateľov (schémy nástrojov, adaptéry fetch/TTS, obslužné programy quirk). Medzi vykonávateľov patrí:
+170 modulov spúšťača najvyššej úrovne (`*.ts` mínus `base.ts`, `index.ts` a testuje — počet meraní `npm run check:docs-counts` ). Každá trieda exekútorov rozširuje `BaseExecutor` (`base.ts`), priamo alebo prostredníctvom `DefaultExecutor` alebo iného exekútora; zostávajúce moduly sú pomocníkmi pre jednotlivých poskytovateľov (schémy nástrojov, adaptéry fetch/TTS, obslužné programy quirk). Medzi vykonávateľov patrí:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex` `devin-desktop` plus identita `claudeIdentity.ts`, `index.ts` (registra).
 
-> Poznámka: Poskytovatelia, ktorí tu nie sú uvedení, sú obsluhovaní `default.ts` pomocou všeobecného spúšťača kompatibilného s OpenAI. Úplný katalóg poskytovateľov (381 poskytovateľov) žije v `src/shared/constants/providers.ts`.
+> Poznámka: Poskytovatelia, ktorí tu nie sú uvedení, sú obsluhovaní `default.ts` pomocou všeobecného spúšťača kompatibilného s OpenAI. Úplný katalóg poskytovateľov (389 poskytovateľov) žije v `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 
@@ -530,7 +530,7 @@ Najdôležitejšie (úplný zoznam pod `open-sse/services/`):
 
 - **110 jedinečných nástrojov** zapojené v `server.ts` (45 kanonických v `schemas/tools.ts` + pamäť, zručnosti, zručnosti GitHub, fond, gamifikácia, plugin, Notion, Obsidian, lokálny korpus a kompresné moduly — union počítané podľa `countUniqueMcpTools`).
 - **3 transporty** : stdio, HTTP Streamovateľné, SSE.
-- **33 rozsahov** vynútené za behu základného zoznamu — v `src/shared/constants/mcpScopes.ts`, úplná množina je zjednotením rozsahov deklarovaných každým modulom nástroja.
+- **33 rozsahov** vynútený za behu základného zoznamu — v `src/shared/constants/mcpScopes.ts`, úplná množina je zjednotením rozsahov deklarovaných každým modulom nástroja.
 - Tabuľka auditu: `mcp_tool_audit` (vyplnená `audit.ts`).
 - Súbory: `server.ts`, `index.ts`, `httpTransport.ts`, `audit.ts`, `scopeEnforcement.ts`, `runtimeHeartbeat.ts`, `descriptionCompressor.ts`, `schemas/{tools, a2a, audit, index}.ts`, `tools/{advancedTools, compressionTools, memoryTools, skillTools}.ts`, plus testy pod `__tests__/`.
 - Úplný katalóg nástrojov nájdete [MCP-SERVER.md](../frameworks/MCP-SERVER.md).
@@ -541,7 +541,7 @@ Provider registries (`providerRegistry.ts`, `providerModels.ts`, `providerHeader
 
 ### 4.8 `open-sse/utils/`
 
-Primitíva streamovania a pomocníci poskytovateľa: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts`, `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `progressTracker.ts`, `cors.ts` `logger.ts` `error.ts` `requestLogger.ts`, `sleep.ts` `ollamaTransform.ts`
+Primitívy streamovania a pomocníci poskytovateľa: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts` `bypassHandler.ts`, `aiSdkCompat.ts`, `requestLogger.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `progressTracker.ts` `error.ts` `cors.ts`, `logger.ts`, `sleep.ts` `ollamaTransform.ts`
 
 ---
 

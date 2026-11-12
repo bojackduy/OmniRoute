@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `components/`                    | مكون لوحة المعلومات API: المحولات عبر `packages/ui-kit` — راجع `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: أسماء الأيقونات المستخدمة من قبل مكونات الشاشات → Lucide (`<Icon>`)                     |
-| `constants/providers.ts`         | **381 مقدم** مع التحقق من صحة Zod (مصدر الحقيقة)                                                    |
+| `constants/providers.ts`         | **389 مقدم** مع التحقق من صحة Zod (مصدر الحقيقة)                                                    |
 | `constants/cliTools.ts`          | تسجيل أداة CLI الخارجية                                                                             |
 | `constants/routingStrategies.ts` | **20 استراتيجية توجيه** مع الأولويات                                                                |
 | `constants/publicApiRoutes.ts`   | الطرق التي تتطلب مصادقة الحامل (مقابل الإدارة).                                                     |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — مساحة عمل محرك البث
+## مساحة عمل محرك البث `open-sse/` —
 
-مساحة عمل npm منفصلة (`@omniroute/open-sse`). تتولى معالجة الطلبات وتنفيذ موفّري الخدمة.
+مساحة عمل npm منفصلة (`@omniroute/open-sse`). يعالج طلب معالجة تنفيذ مزود +.
 
 ```
 open-sse/
-├── handlers/            # 16 ملفًا (12 معالجًا + 4 أدوات مساعدة): chatCore، responsesHandler، embeddings، audio، image، video، music، rerank، moderations، search، وغيرها.
-├── executors/           # 150 وحدة تنفيذ (فئات توسّع BaseExecutor + أدوات مساعدة خاصة بكل موفّر)
-├── translator/          # محوّلات التنسيق (9 للطلبات، و9 للاستجابات، و9 أدوات مساعدة)
-├── transformer/         # Responses API ↔ Chat Completions‏ (TransformStream)
-├── services/            # أكثر من ~80 وحدة خدمة (combo، accountFallback، autoCombo، reasoningCache، وضع التخفي في claude code/chatgpt، modelDeprecation، taskAwareRouter، workflowFSM، وغيرها)
-├── mcp-server/          # خادم MCP‏ (110 أدوات، و3 وسائل نقل، و33 نطاقًا)
-├── config/              # سجلات الموفّرين/النماذج، وتهيئة الترويسات، والأسماء البديلة للنماذج
-├── utils/               # عميل TLS، وجلب/موزّع الوكيل، وأدوات الشبكة المساعدة
-├── index.ts             # نقطة دخول مساحة العمل
-├── package.json         # بيان مساحة العمل
-├── tsconfig.json        # تهيئة TS لمساحة العمل
-└── types.d.ts           # تعريفات الأنواع لمساحة العمل
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
+├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| المسار                      | الغرض                                                                           |
-| --------------------------- | ------------------------------------------------------------------------------- |
-| `server.ts`                 | دورة حياة خادم MCP‏ (وسائل نقل stdio وHTTP)                                     |
-| `httpTransport.ts`          | وسائل نقل HTTP القابلة للبث وSSE‏ (`/api/mcp/sse`، `/api/mcp/stream`)           |
-| `audit.ts`                  | تسجيل التدقيق في جدول `mcp_tool_audit`                                          |
-| `scopeEnforcement.ts`       | التحقق من النطاق لكل أداة                                                       |
-| `runtimeHeartbeat.ts`       | نبضة سلامة إلى `DATA_DIR/runtime/mcp-heartbeat.json`                            |
-| `descriptionCompressor.ts`  | ضغط البيانات الوصفية لأوصاف الأدوات لتوفير السياق                               |
-| `schemas/tools.ts`          | 36 تعريفًا أساسيًا للأدوات + النطاقات                                           |
-| `tools/advancedTools.ts`    | تنفيذات الأدوات المتقدمة                                                        |
-| `tools/memoryTools.ts`      | 3 أدوات للذاكرة (البحث/الإضافة/المسح)                                           |
-| `tools/skillTools.ts`       | 4 أدوات للمهارات (العرض/التمكين/التنفيذ/عمليات التنفيذ)                         |
-| `tools/compressionTools.ts` | 5 أدوات للضغط                                                                   |
-| `README.md`                 | ملف README داخلي لخادم MCP‏ (مرتبط تبادليًا من `docs/frameworks/MCP-SERVER.md`) |
+| طريق                        | غاية                                                                |
+| --------------------------- | ------------------------------------------------------------------- |
+| `server.ts`                 | دورة حياة خادم MCP (وسائل النقل stdio + HTTP )                      |
+| `httpTransport.ts`          | HTTP وسائل النقل + SSE للتدفق (`/api/mcp/sse`، `/api/mcp/stream`)   |
+| `audit.ts`                  | تسجيل التدقيق في جدول `mcp_tool_audit`                              |
+| `scopeEnforcement.ts`       | التحقق من صحة نطاق كل أداة                                          |
+| `runtimeHeartbeat.ts`       | الصحة نبض القلب إلى `DATA_DIR/runtime/mcp-heartbeat.json`           |
+| `descriptionCompressor.ts`  | ضغط البيانات التعريفية لوصف الأداة لحفظ السياق                      |
+| `schemas/tools.ts`          | 36 تعريفًا للأداة الأساسية ونطاقات +                                |
+| `tools/advancedTools.ts`    | تطبيقات الأدوات المتقدمة                                            |
+| `tools/memoryTools.ts`      | 3 أدوات الذاكرة (search/add/clear)                                  |
+| `tools/skillTools.ts`       | 4 أدوات المهارة (list/enable/execute/executions)                    |
+| `tools/compressionTools.ts` | 5 أدوات ضغط                                                         |
+| `README.md`                 | خادم MCP الداخلي README (مرتبط عبر `docs/frameworks/MCP-SERVER.md`) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | تكاملات CLI الخارجية + الداخلية OmniRoute CLI                                             |
 | `I18N.md`                   | بنية i18n، إضافة لغة، 67 لغة                                                              |
 | `UNINSTALL.md`              | خطوات إلغاء التثبيت النظيفة                                                               |
-| `PROVIDER_REFERENCE.md`     | **تم إنشاؤها تلقائيًا** كتالوج 381 مقدمي الخدمة (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **تم إنشاؤها تلقائيًا** كتالوج 389 مقدمي الخدمة (regen: `npm run gen:provider-reference`) |
 
 ### الغوص العميق في النظام الفرعي
 

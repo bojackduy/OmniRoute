@@ -207,13 +207,13 @@ src/
 
 ### `src/lib/db/` — ഡാറ്റാബേസ് (147 മൊഡ്യൂളുകൾ + 208 മൈഗ്രേഷനുകൾ)
 
-| സബ്ദിർ                    | ഉദ്ദേശം                                                                                                                                                                                                  |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `db/core.ts`              | WAL ജേണലിംഗ് ഉള്ള `getDbInstance()` singleton                                                                                                                                                            |
-| `db/migrations/`          | പതിപ്പ് ചെയ്ത SQL ഫയലുകൾ (idempotent, ഇടപാട്). `073_memory_vec.sql` `memory_vec_meta` + `needs_reindex` കോളം ചേർക്കുന്നു (പ്ലാൻ 21).                                                                     |
-| `db/playgroundPresets.ts` | പ്ലേഗ്രൗണ്ട് സ്റ്റുഡിയോ പ്രീസെറ്റുകൾക്കുള്ള CRUD മൊഡ്യൂൾ (`listPlaygroundPresets`, `getPlaygroundPreset`, `createPlaygroundPreset`, `updatePlaygroundPreset`, `deletePlaygroundPreset`)                  |
-| `db/memoryVec.ts`         | `memory_vec_meta` നുള്ള CRUD (active_dim, embedding_signature, last_reset_at, vec_loaded) + `markMemoryNeedsReindex`, `getMemoryReindexQueue`, മുതലായവ (പ്ലാൻ 21)                                        |
-| `db/<domain>.ts`          | ഓരോ ഡൊമെയ്നിനും ഒരു മൊഡ്യൂൾ: ദാതാക്കൾ, കോമ്പോകൾ, apiKeys, ഉപയോക്താക്കൾ, സെഷനുകൾ, ഉപയോഗം, ഓഡിറ്റ് ലോഗ്, വെബ്ഹുക്കുകൾ, കഴിവുകൾ, memory_entries, cloud_agent_tasks, evals* \* , reasoning_cache, തുടങ്ങിയവ. |
+| സബ്ദിർ                    | ഉദ്ദേശം                                                                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `db/core.ts`              | WAL ജേണലിംഗ് ഉള്ള `getDbInstance()` singleton                                                                                                                                                          |
+| `db/migrations/`          | പതിപ്പ് ചെയ്ത SQL ഫയലുകൾ (idempotent, ഇടപാട്). `073_memory_vec.sql` `memory_vec_meta` + `needs_reindex` കോളം ചേർക്കുന്നു (പ്ലാൻ 21).                                                                   |
+| `db/playgroundPresets.ts` | പ്ലേഗ്രൗണ്ട് സ്റ്റുഡിയോ പ്രീസെറ്റുകൾക്കുള്ള CRUD മൊഡ്യൂൾ (`listPlaygroundPresets`, `getPlaygroundPreset`, `createPlaygroundPreset`, `updatePlaygroundPreset`, `deletePlaygroundPreset`)                |
+| `db/memoryVec.ts`         | `memory_vec_meta` നുള്ള CRUD (active_dim, embedding_signature, last_reset_at, vec_loaded) + `markMemoryNeedsReindex`, `getMemoryReindexQueue`, മുതലായവ (പ്ലാൻ 21)                                      |
+| `db/<domain>.ts`          | ഓരോ ഡൊമെയ്നിനും ഒരു മൊഡ്യൂൾ: ദാതാക്കൾ, കോമ്പോകൾ, apiKeys, ഉപയോക്താക്കൾ, സെഷനുകൾ, ഉപയോഗം, ഓഡിറ്റ് ലോഗ്, വെബ്ഹുക്കുകൾ, കഴിവുകൾ, memory_entries, cloud_agent_tasks, evals* \* , reasoning_cache, മുതലായവ. |
 
 ### `src/domain/`
 
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `components/`                    | ഡാഷ്ബോർഡ് ഘടകം API: `packages/ui-kit` ക്ക് മുകളിലുള്ള അഡാപ്റ്ററുകൾ — `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: സ്ക്രീനുകൾ ഉപയോഗിക്കുന്ന ഐക്കൺ പേരുകൾ → ലൂസൈഡ് ഘടകങ്ങൾ (`<Icon>`)                             |
-| `constants/providers.ts`         | **381 ദാതാക്കൾ** Zod മൂല്യനിർണ്ണയത്തോടെ (സത്യത്തിൻ്റെ ഉറവിടം)                                             |
+| `constants/providers.ts`         | **389 ദാതാക്കൾ** Zod മൂല്യനിർണ്ണയത്തോടെ (സത്യത്തിൻ്റെ ഉറവിടം)                                             |
 | `constants/cliTools.ts`          | ബാഹ്യ CLI ടൂൾ രജിസ്ട്രി                                                                                   |
 | `constants/routingStrategies.ts` | **20 റൂട്ടിംഗ് തന്ത്രങ്ങൾ** മുൻഗണനകളോടെ                                                                   |
 | `constants/publicApiRoutes.ts`   | Bearer (vs management) ഓത്ത് ആവശ്യമുള്ള റൂട്ടുകൾ                                                          |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — സ്ട്രീമിംഗ് എഞ്ചിൻ വർക്ക്സ്പേസ്
+## `open-sse/` — സ്ട്രീമിംഗ് എഞ്ചിൻ വർക്ക്സ്പെയ്സ്
 
-വേറിട്ട npm വർക്ക്സ്പേസ് (`@omniroute/open-sse`). അഭ്യർത്ഥന പ്രോസസ്സിംഗും പ്രൊവൈഡർ നിർവഹണവും കൈകാര്യം ചെയ്യുന്നു.
+npm വർക്ക്സ്പേസ് (`@omniroute/open-sse`) വേർതിരിക്കുക. അഭ്യർത്ഥന പ്രോസസ്സിംഗ് + പ്രൊവൈഡർ എക്സിക്യൂഷൻ കൈകാര്യം ചെയ്യുന്നു.
 
 ```
 open-sse/
-├── handlers/            # 16 ഫയലുകൾ (12 ഹാൻഡ്ലറുകൾ + 4 ഹെൽപ്പറുകൾ): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search തുടങ്ങിയവ.
-├── executors/           # 150 എക്സിക്യൂട്ടർ മൊഡ്യൂളുകൾ (BaseExecutor വിപുലീകരിക്കുന്ന ക്ലാസുകൾ + ഓരോ പ്രൊവൈഡറിനുമുള്ള ഹെൽപ്പറുകൾ)
-├── translator/          # ഫോർമാറ്റ് കൺവെർട്ടറുകൾ (9 അഭ്യർത്ഥന, 9 പ്രതികരണം, 9 ഹെൽപ്പറുകൾ)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ സർവീസ് മൊഡ്യൂളുകൾ (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM തുടങ്ങിയവ.)
-├── mcp-server/          # MCP സെർവർ (110 ടൂളുകൾ, 3 ട്രാൻസ്പോർട്ടുകൾ, 33 സ്കോപ്പുകൾ)
-├── config/              # പ്രൊവൈഡർ/മോഡൽ രജിസ്ട്രികൾ, ഹെഡർ കോൺഫിഗറേഷൻ, മോഡൽ അപരനാമങ്ങൾ
-├── utils/               # TLS ക്ലയന്റ്, പ്രോക്സി fetch/dispatcher, നെറ്റ്വർക്ക് ഹെൽപ്പറുകൾ
-├── index.ts             # വർക്ക്സ്പേസ് എൻട്രി
-├── package.json         # വർക്ക്സ്പേസ് മാനിഫെസ്റ്റ്
-├── tsconfig.json        # വർക്ക്സ്പേസ് TS കോൺഫിഗറേഷൻ
-└── types.d.ts           # വർക്ക്സ്പേസ് ടൈപ്പ് ഡിക്ലറേഷനുകൾ
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| പാത                         | ഉദ്ദേശ്യം                                                                                          |
-| --------------------------- | -------------------------------------------------------------------------------------------------- |
-| `server.ts`                 | MCP സെർവർ ലൈഫ്സൈക്കിൾ (stdio + HTTP ട്രാൻസ്പോർട്ടുകൾ)                                              |
-| `httpTransport.ts`          | HTTP Streamable + SSE ട്രാൻസ്പോർട്ടുകൾ (`/api/mcp/sse`, `/api/mcp/stream`)                         |
-| `audit.ts`                  | `mcp_tool_audit` പട്ടികയിലേക്കുള്ള ഓഡിറ്റ് ലോഗിംഗ്                                                 |
-| `scopeEnforcement.ts`       | ഓരോ ടൂളിനുമുള്ള സ്കോപ്പ് സാധൂകരണം                                                                  |
-| `runtimeHeartbeat.ts`       | `DATA_DIR/runtime/mcp-heartbeat.json`-ലേക്കുള്ള ആരോഗ്യ ഹാർട്ട്ബീറ്റ്                               |
-| `descriptionCompressor.ts`  | കോൺടെക്സ്റ്റ് ലാഭിക്കാൻ ടൂൾ വിവരണ മെറ്റാഡാറ്റ കംപ്രസ് ചെയ്യുന്നു                                   |
-| `schemas/tools.ts`          | 36 അടിസ്ഥാന ടൂൾ നിർവചനങ്ങൾ + സ്കോപ്പുകൾ                                                            |
-| `tools/advancedTools.ts`    | വിപുലമായ ടൂൾ ഇംപ്ലിമെന്റേഷനുകൾ                                                                     |
-| `tools/memoryTools.ts`      | 3 മെമ്മറി ടൂളുകൾ (തിരയുക/ചേർക്കുക/മായ്ക്കുക)                                                       |
-| `tools/skillTools.ts`       | 4 സ്കിൽ ടൂളുകൾ (പട്ടികപ്പെടുത്തുക/പ്രവർത്തനക്ഷമമാക്കുക/നിർവഹിക്കുക/നിർവഹണങ്ങൾ)                     |
-| `tools/compressionTools.ts` | 5 കംപ്രഷൻ ടൂളുകൾ                                                                                   |
-| `README.md`                 | ആന്തരിക MCP സെർവർ README (`docs/frameworks/MCP-SERVER.md`-ൽ നിന്ന് ക്രോസ്-ലിങ്ക് ചെയ്തിരിക്കുന്നു) |
+| പാത                         | ഉദ്ദേശം                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| `server.ts`                 | MCP സെർവർ ജീവിതചക്രം (stdio + HTTP ട്രാൻസ്പോർട്ടുകൾ)                                 |
+| `httpTransport.ts`          | HTTP സ്ട്രീം ചെയ്യാവുന്ന + SSE ട്രാൻസ്പോർട്ടുകൾ (`/api/mcp/sse`, `/api/mcp/stream`)  |
+| `audit.ts`                  | `mcp_tool_audit` ടേബിളിലേക്കുള്ള ഓഡിറ്റ് ലോഗിംഗ്                                     |
+| `scopeEnforcement.ts`       | ഓരോ ടൂൾ സ്കോപ്പ് മൂല്യനിർണ്ണയം                                                       |
+| `runtimeHeartbeat.ts`       | ആരോഗ്യ ഹൃദയമിടിപ്പ് `DATA_DIR/runtime/mcp-heartbeat.json`                            |
+| `descriptionCompressor.ts`  | സന്ദർഭം സംരക്ഷിക്കാൻ ടൂൾ വിവരണ മെറ്റാഡാറ്റ കംപ്രസ് ചെയ്യുക                           |
+| `schemas/tools.ts`          | 36 അടിസ്ഥാന ടൂൾ നിർവചനങ്ങൾ + സ്കോപ്പുകൾ                                              |
+| `tools/advancedTools.ts`    | വിപുലമായ ടൂൾ നടപ്പിലാക്കലുകൾ                                                         |
+| `tools/memoryTools.ts`      | 3 മെമ്മറി ഉപകരണങ്ങൾ (search/add/clear)                                               |
+| `tools/skillTools.ts`       | 4 നൈപുണ്യ ഉപകരണങ്ങൾ (list/enable/execute/executions)                                 |
+| `tools/compressionTools.ts` | 5 കംപ്രഷൻ ഉപകരണങ്ങൾ                                                                  |
+| `README.md`                 | ആന്തരിക MCP സെർവർ README ( `docs/frameworks/MCP-SERVER.md` ൽ നിന്ന് ക്രോസ്-ലിങ്ക്ഡ്) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ബാഹ്യ CLI സംയോജനങ്ങൾ + ആന്തരിക OmniRoute CLI                                                |
 | `I18N.md`                   | i18n ആർക്കിടെക്ചർ, ഒരു ഭാഷ ചേർക്കുന്നു, 67 ലൊക്കേലുകൾ                                       |
 | `UNINSTALL.md`              | അൺഇൻസ്റ്റാൾ ഘട്ടങ്ങൾ വൃത്തിയാക്കുക                                                          |
-| `PROVIDER_REFERENCE.md`     | **സ്വയമേവ സൃഷ്ടിച്ചത്** 381 ദാതാക്കളുടെ കാറ്റലോഗ് (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **സ്വയമേവ സൃഷ്ടിച്ചത്** 389 ദാതാക്കളുടെ കാറ്റലോഗ് (regen: `npm run gen:provider-reference`) |
 
 ### സബ്സിസ്റ്റം ആഴത്തിലുള്ള ഡൈവുകൾ
 

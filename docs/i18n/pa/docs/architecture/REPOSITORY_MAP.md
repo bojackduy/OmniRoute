@@ -186,7 +186,7 @@ src/
 | `embeddings/`                            | ਏਮਬੈਡਿੰਗ ਸੇਵਾ ਸਹਾਇਕ                                                                                                                                                                                                                                                                                             |
 | `env/`                                   | Env ਵੇਰੀਏਬਲ ਪਾਰਸਿੰਗ + ਪ੍ਰਮਾਣਿਕਤਾ                                                                                                                                                                                                                                                                                |
 | `evals/`                                 | Eval ਫਰੇਮਵਰਕ (ਸੂਟ, ਰਨਰ, ਰਨਟਾਈਮ) — `docs/frameworks/EVALS.md` ਵੇਖੋ                                                                                                                                                                                                                                               |
-| `guardrails/`                            | PII ਮਾਸਕ, ਪ੍ਰੋਂਪਟ ਇੰਜੈਕਸ਼ਨ, ਵਿਜ਼ਨ ਬ੍ਰਿਜ — ਦੇਖੋ `docs/security/GUARDRAILS.md`                                                                                                                                                                                                                                    |
+| `guardrails/`                            | PII ਮਾਸਕਰ, ਪ੍ਰੋਂਪਟ ਇੰਜੈਕਸ਼ਨ, ਵਿਜ਼ਨ ਬ੍ਰਿਜ — ਦੇਖੋ `docs/security/GUARDRAILS.md`                                                                                                                                                                                                                                   |
 | `jobs/`                                  | ਪਿਛੋਕੜ ਦੀਆਂ ਨੌਕਰੀਆਂ (ਕ੍ਰੋਨ ਵਰਗੀਆਂ)                                                                                                                                                                                                                                                                              |
 | `memory/`                                | ਗੱਲਬਾਤ ਸੰਬੰਧੀ ਮੈਮੋਰੀ (SQLite FTS5 + sqlite-vec ਹਾਈਬ੍ਰਿਡ RRF + Qdrant ਟੀਅਰ 2) — ਦੇਖੋ `docs/frameworks/MEMORY.md`                                                                                                                                                                                                 |
 | `memory/embedding/`                      | ਮਲਟੀ-ਸੋਰਸ ਏਮਬੈਡਿੰਗ ਲੇਅਰ: `index.ts` (ਰੈਜ਼ੋਲਵਰ), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (ਯੋਜਨਾ 21)                                                                                                                                                                       |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `components/`                    | ਡੈਸ਼ਬੋਰਡ ਕੰਪੋਨੈਂਟ API: `packages/ui-kit` — ਉੱਤੇ ਅਡਾਪਟਰ ਵੇਖੋ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ਸਕ੍ਰੀਨਾਂ ਦੁਆਰਾ ਵਰਤੇ ਗਏ ਆਈਕਨ ਨਾਮ → ਲੂਸਾਈਡ ਕੰਪੋਨੈਂਟਸ (`<Icon>`)                        |
-| `constants/providers.ts`         | **੩੮੧ ਪ੍ਰਦਾਤਾ** Zod ਪ੍ਰਮਾਣਿਕਤਾ ਦੇ ਨਾਲ (ਸੱਚ ਦਾ ਸਰੋਤ)                                              |
+| `constants/providers.ts`         | **389 ਪ੍ਰਦਾਤਾ** Zod ਪ੍ਰਮਾਣਿਕਤਾ ਦੇ ਨਾਲ (ਸੱਚ ਦਾ ਸਰੋਤ)                                              |
 | `constants/cliTools.ts`          | ਬਾਹਰੀ CLI ਟੂਲ ਰਜਿਸਟਰੀ                                                                            |
 | `constants/routingStrategies.ts` | **20 ਰੂਟਿੰਗ ਰਣਨੀਤੀਆਂ** ਤਰਜੀਹਾਂ ਦੇ ਨਾਲ                                                            |
 | `constants/publicApiRoutes.ts`   | ਰੂਟ ਜਿਨ੍ਹਾਂ ਲਈ ਬੇਅਰਰ (ਬਨਾਮ ਪ੍ਰਬੰਧਨ) ਪ੍ਰਮਾਣਿਕਤਾ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ                                   |
@@ -260,40 +260,40 @@ src/
 
 ## `open-sse/` — ਸਟ੍ਰੀਮਿੰਗ ਇੰਜਣ ਵਰਕਸਪੇਸ
 
-ਵੱਖਰਾ npm ਵਰਕਸਪੇਸ (`@omniroute/open-sse`)। ਬੇਨਤੀ ਪ੍ਰੋਸੈਸਿੰਗ + ਪ੍ਰੋਵਾਈਡਰ ਐਗਜ਼ਿਕਿਊਸ਼ਨ ਨੂੰ ਸੰਭਾਲਦਾ ਹੈ।
+ਵੱਖਰਾ npm ਵਰਕਸਪੇਸ (`@omniroute/open-sse`)। ਬੇਨਤੀ ਦੀ ਪ੍ਰਕਿਰਿਆ + ਪ੍ਰਦਾਤਾ ਐਗਜ਼ੀਕਿਊਸ਼ਨ ਨੂੰ ਸੰਭਾਲਦਾ ਹੈ।
 
 ```
 open-sse/
-├── handlers/            # 16 ਫ਼ਾਈਲਾਂ (12 ਹੈਂਡਲਰ + 4 ਸਹਾਇਕ): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, ਆਦਿ।
-├── executors/           # 150 ਐਗਜ਼ਿਕਿਊਟਰ ਮੋਡੀਊਲ (BaseExecutor ਨੂੰ ਵਿਸਤਾਰ ਕਰਨ ਵਾਲੀਆਂ ਕਲਾਸਾਂ + ਹਰੇਕ ਪ੍ਰੋਵਾਈਡਰ ਲਈ ਸਹਾਇਕ)
-├── translator/          # ਫਾਰਮੈਟ ਕਨਵਰਟਰ (9 ਬੇਨਤੀ, 9 ਜਵਾਬ, 9 ਸਹਾਇਕ)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ ਸਰਵਿਸ ਮੋਡੀਊਲ (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, ਆਦਿ)
-├── mcp-server/          # MCP ਸਰਵਰ (110 ਟੂਲ, 3 ਟ੍ਰਾਂਸਪੋਰਟ, 33 ਸਕੋਪ)
-├── config/              # ਪ੍ਰੋਵਾਈਡਰ/ਮਾਡਲ ਰਜਿਸਟਰੀਆਂ, ਹੈਡਰ ਸੰਰਚਨਾ, ਮਾਡਲ ਉਪਨਾਮ
-├── utils/               # TLS ਕਲਾਇੰਟ, ਪ੍ਰੌਕਸੀ fetch/dispatcher, ਨੈੱਟਵਰਕ ਸਹਾਇਕ
-├── index.ts             # ਵਰਕਸਪੇਸ ਐਂਟਰੀ
-├── package.json         # ਵਰਕਸਪੇਸ ਮੈਨੀਫੈਸਟ
-├── tsconfig.json        # ਵਰਕਸਪੇਸ TS ਸੰਰਚਨਾ
-└── types.d.ts           # ਵਰਕਸਪੇਸ ਕਿਸਮ ਘੋਸ਼ਣਾਵਾਂ
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| ਪਾਥ                         | ਉਦੇਸ਼                                                                             |
-| --------------------------- | --------------------------------------------------------------------------------- |
-| `server.ts`                 | MCP ਸਰਵਰ ਜੀਵਨ-ਚੱਕਰ (stdio + HTTP ਟ੍ਰਾਂਸਪੋਰਟ)                                      |
-| `httpTransport.ts`          | HTTP Streamable + SSE ਟ੍ਰਾਂਸਪੋਰਟ (`/api/mcp/sse`, `/api/mcp/stream`)              |
-| `audit.ts`                  | `mcp_tool_audit` ਟੇਬਲ ਵਿੱਚ ਆਡਿਟ ਲੌਗਿੰਗ                                            |
-| `scopeEnforcement.ts`       | ਹਰੇਕ ਟੂਲ ਲਈ ਸਕੋਪ ਪ੍ਰਮਾਣਿਕਤਾ                                                       |
-| `runtimeHeartbeat.ts`       | `DATA_DIR/runtime/mcp-heartbeat.json` ਵਿੱਚ ਸਿਹਤ ਹਾਰਟਬੀਟ                           |
-| `descriptionCompressor.ts`  | ਸੰਦਰਭ ਬਚਾਉਣ ਲਈ ਟੂਲ ਵੇਰਵਾ ਮੈਟਾਡਾਟਾ ਨੂੰ ਸੰਕੁਚਿਤ ਕਰਦਾ ਹੈ                             |
-| `schemas/tools.ts`          | 36 ਮੂਲ ਟੂਲ ਪਰਿਭਾਸ਼ਾਵਾਂ + ਸਕੋਪ                                                     |
-| `tools/advancedTools.ts`    | ਉੱਨਤ ਟੂਲ ਲਾਗੂਕਰਨ                                                                  |
-| `tools/memoryTools.ts`      | 3 ਮੈਮੋਰੀ ਟੂਲ (ਖੋਜ/ਜੋੜਨਾ/ਸਾਫ਼ ਕਰਨਾ)                                                |
-| `tools/skillTools.ts`       | 4 ਹੁਨਰ ਟੂਲ (ਸੂਚੀ/ਸਮਰੱਥ ਕਰਨਾ/ਚਲਾਉਣਾ/ਐਗਜ਼ਿਕਿਊਸ਼ਨ)                                   |
-| `tools/compressionTools.ts` | 5 ਸੰਕੁਚਨ ਟੂਲ                                                                      |
-| `README.md`                 | ਅੰਦਰੂਨੀ MCP ਸਰਵਰ README (`docs/frameworks/MCP-SERVER.md` ਤੋਂ ਕਰਾਸ-ਲਿੰਕ ਕੀਤਾ ਹੋਇਆ) |
+| ਮਾਰਗ                        | ਮਕਸਦ                                                                      |
+| --------------------------- | ------------------------------------------------------------------------- |
+| `server.ts`                 | MCP ਸਰਵਰ ਲਾਈਫਸਾਈਕਲ (stdio + HTTP ਟ੍ਰਾਂਸਪੋਰਟ)                              |
+| `httpTransport.ts`          | HTTP ਸਟ੍ਰੀਮ ਕਰਨ ਯੋਗ + SSE ਟ੍ਰਾਂਸਪੋਰਟ (`/api/mcp/sse`, `/api/mcp/stream`)  |
+| `audit.ts`                  | `mcp_tool_audit` ਸਾਰਣੀ ਵਿੱਚ ਆਡਿਟ ਲਾਗਿੰਗ                                   |
+| `scopeEnforcement.ts`       | ਪ੍ਰਤੀ-ਟੂਲ ਸਕੋਪ ਪ੍ਰਮਾਣਿਕਤਾ                                                 |
+| `runtimeHeartbeat.ts`       | ਸਿਹਤ ਦਿਲ ਦੀ ਧੜਕਣ `DATA_DIR/runtime/mcp-heartbeat.json` ਨੂੰ                |
+| `descriptionCompressor.ts`  | ਸੰਦਰਭ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰਨ ਲਈ ਟੂਲ ਵਰਣਨ ਮੈਟਾਡੇਟਾ ਨੂੰ ਸੰਕੁਚਿਤ ਕਰੋ               |
+| `schemas/tools.ts`          | 36 ਬੇਸ ਟੂਲ ਪਰਿਭਾਸ਼ਾਵਾਂ + ਸਕੋਪ                                             |
+| `tools/advancedTools.ts`    | ਐਡਵਾਂਸਡ ਟੂਲ ਲਾਗੂ ਕਰਨਾ                                                     |
+| `tools/memoryTools.ts`      | 3 ਮੈਮੋਰੀ ਟੂਲ (search/add/clear)                                           |
+| `tools/skillTools.ts`       | 4 ਹੁਨਰ ਸੰਦ (list/enable/execute/executions)                               |
+| `tools/compressionTools.ts` | 5 ਕੰਪਰੈਸ਼ਨ ਟੂਲ                                                            |
+| `README.md`                 | ਅੰਦਰੂਨੀ MCP ਸਰਵਰ README ( `docs/frameworks/MCP-SERVER.md` ਤੋਂ ਕਰਾਸ-ਲਿੰਕਡ) |
 
 ---
 
@@ -391,7 +391,7 @@ open-sse/
 
 ---
 
-## `docs/` — ਜਨਤਕ ਦਸਤਾਵੇਜ਼ (7 ਰੂਟ ਫਾਈਲਾਂ + 17 ਸਬਡਾਈਰਜ਼)
+## `docs/` — ਪਬਲਿਕ ਡੌਕੂਮੈਂਟੇਸ਼ਨ (7 ਰੂਟ ਫਾਈਲਾਂ + 17 ਸਬਡਾਈਰਜ਼)
 
 ### ਸਿਖਰ-ਪੱਧਰ ਦੀਆਂ ਗਾਈਡਾਂ
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ਬਾਹਰੀ CLI ਏਕੀਕਰਣ + ਅੰਦਰੂਨੀ OmniRoute CLI                                          |
 | `I18N.md`                   | i18n ਆਰਕੀਟੈਕਚਰ, ਇੱਕ ਭਾਸ਼ਾ ਜੋੜਨਾ, 67 ਲੋਕੇਲ                                         |
 | `UNINSTALL.md`              | ਅਣਇੰਸਟੌਲ ਕਦਮਾਂ ਨੂੰ ਸਾਫ਼ ਕਰੋ                                                       |
-| `PROVIDER_REFERENCE.md`     | **ਸਵੈ-ਤਿਆਰ ਕੀਤਾ** 381 ਪ੍ਰਦਾਤਾਵਾਂ ਦੀ ਸੂਚੀ (ਰੀਜਨ: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ਸਵੈ-ਤਿਆਰ ਕੀਤਾ** 389 ਪ੍ਰਦਾਤਾਵਾਂ ਦੀ ਸੂਚੀ (ਰੀਜਨ: `npm run gen:provider-reference`) |
 
 ### ਉਪ-ਸਿਸਟਮ ਡੂੰਘੇ-ਡੁਬਕੀ
 

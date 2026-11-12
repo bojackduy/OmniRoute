@@ -154,9 +154,9 @@ src/
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | ٹریفک انسپکٹر ڈیش بورڈ صفحہ — DevTools اسپلٹ، 7 ڈیٹیل ٹیبز، 4 کیپچر موڈ ٹوگلز، سیشن ریکارڈر، سیاق و سباق کا رنگ کاری۔ i18n PT-BR + EN۔ `docs/frameworks/TRAFFIC_INSPECTOR.md` دیکھیں۔                                                                                                                             |
 | `app/(dashboard)/dashboard/activity/`                                        | سرگرمی فیڈ صفحہ (گروپ بی): `page.tsx` (سرور) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — دیکھیں `docs/architecture/MONITORING_SECTIONS.md`                                                                                                              |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | کوٹہ شیئرنگ پیج (گروپ بی): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                            |
-| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | فراہم کنندہ کی منصوبہ بندی کا صفحہ (گروپ بی): `page.tsx` + `ProviderPlanConfigClient.tsx` — کوٹہ کے طول و عرض فی کنکشن اوور رائڈ                                                                                                                                                                                  |
+| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | فراہم کنندہ کی منصوبہ بندی کا صفحہ (گروپ B): `page.tsx` + `ProviderPlanConfigClient.tsx` — کوٹہ کے طول و عرض فی کنکشن اوور رائڈ                                                                                                                                                                                   |
 | `app/docs/`                                                                  | ایمبیڈڈ دستاویزات کا ناظر ( `docs/*.md` پیش کرتا ہے)                                                                                                                                                                                                                                                              |
-| `app/landing/`                                                               | مارکیٹنگ لینڈنگ پیج                                                                                                                                                                                                                                                                                               |
+| `app/landing/`                                                               | مارکیٹنگ لینڈنگ کا صفحہ                                                                                                                                                                                                                                                                                           |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | توثیق سے متعلق صفحات                                                                                                                                                                                                                                                                                              |
 | `app/{400,401,403,408,429,500,502,503}/`                                     | HTTP غلطی والے صفحات                                                                                                                                                                                                                                                                                              |
 | `app/maintenance/`, `offline/`, `status/`, `privacy/`, `terms/`, `callback/` | Static/status صفحات                                                                                                                                                                                                                                                                                               |
@@ -190,8 +190,8 @@ src/
 | `jobs/`                                  | پس منظر کی نوکریاں (کرون جیسی)                                                                                                                                                                                                                                                                                   |
 | `memory/`                                | بات چیت کی یادداشت (SQLite FTS5 + sqlite-vec hybrid RRF + Qdrant ٹائر 2) — دیکھیں `docs/frameworks/MEMORY.md`                                                                                                                                                                                                    |
 | `memory/embedding/`                      | ملٹی سورس ایمبیڈنگ پرت: `index.ts` (ریزولوور)، `remote.ts`، `staticPotion.ts`، `transformersLocal.ts`، `cache.ts`، `types.ts` (پلان 21)                                                                                                                                                                          |
-| `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + ہائبرڈ RRF (FTS5 + vector, k = 60)۔ Lazy-init، sqlite-vec دستیاب نہ ہونے پر خوبصورتی سے تنزلی کرتا ہے۔ (پلان نمبر 21)                                                                                                                                              |
-| `memory/reindex.ts`                      | `runReindexBatch()` — پس منظر میں `needs_reindex=1` کے ساتھ یادوں پر کارروائی کرتا ہے۔ `POST /api/memory/reindex` اور lazy-backfill path کے ذریعے کہا جاتا ہے۔ (پلان نمبر 21)                                                                                                                                    |
+| `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + ہائبرڈ RRF (FTS5 + vector, k = 60)۔ Lazy-init، sqlite-vec دستیاب نہ ہونے پر خوبصورتی سے تنزلی کرتا ہے۔ (منصوبہ 21)                                                                                                                                                 |
+| `memory/reindex.ts`                      | `runReindexBatch()` — پس منظر میں `needs_reindex=1` کے ساتھ یادوں پر کارروائی کرتا ہے۔ `POST /api/memory/reindex` اور lazy-backfill path کے ذریعے کہا جاتا ہے۔ (منصوبہ 21)                                                                                                                                       |
 | `monitoring/`                            | صحت کی جانچ، میٹرکس کا اخراج                                                                                                                                                                                                                                                                                     |
 | `oauth/`                                 | OAuth/import 22 فراہم کنندگان کے ماڈیولز (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimio, kimio, kimio- xai-oauth, zed-hosted, zed)                                                                     |
 | `plugins/`                               | پلگ ان رجسٹری                                                                                                                                                                                                                                                                                                    |
@@ -221,7 +221,7 @@ src/
 | ---------------------- | -------------------------------------------------------- |
 | `policy.ts`            | پالیسی انجن                                              |
 | `fallbackPolicy.ts`    | فال بیک فیصلے کا درخت                                    |
-| `costRules.ts`         | لاگت کے حساب کتاب کے اصول                                |
+| `costRules.ts`         | لاگت کے حساب کتاب کے قواعد                               |
 | `lockoutPolicy.ts`     | Model/connection لاک آؤٹ پالیسی                          |
 | `tagRouter.ts`         | ٹیگ پر مبنی روٹنگ                                        |
 | `comboResolver.ts`     | کومبو ریزولوشن (کومبو انجن کے ذریعے استعمال کیا جاتا ہے) |
@@ -241,8 +241,8 @@ src/
 | ماڈیول                           | مقصد                                                                                          |
 | -------------------------------- | --------------------------------------------------------------------------------------------- |
 | `components/`                    | ڈیش بورڈ جزو API: اڈاپٹر اوور `packages/ui-kit` — دیکھیں `docs/architecture/DESIGN_SYSTEM.md` |
-| `constants/iconMap.ts`           | `ICON_MAP`: اسکرینز کے ذریعے استعمال ہونے والے آئیکن کے نام → Lucide اجزاء (`<Icon>`)         |
-| `constants/providers.ts`         | **381 فراہم کرنے والے** Zod توثیق کے ساتھ (سچائی کا ذریعہ)                                    |
+| `constants/iconMap.ts`           | `ICON_MAP`: اسکرینز کے ذریعہ استعمال ہونے والے آئیکن کے نام → Lucide اجزاء (`<Icon>`)         |
+| `constants/providers.ts`         | **389 فراہم کرنے والے** Zod توثیق کے ساتھ (سچائی کا ذریعہ)                                    |
 | `constants/cliTools.ts`          | بیرونی CLI ٹول رجسٹری                                                                         |
 | `constants/routingStrategies.ts` | **20 روٹنگ کی حکمت عملی** ترجیحات کے ساتھ                                                     |
 | `constants/publicApiRoutes.ts`   | وہ راستے جن کے لیے بیئرر (بمقابلہ مینجمنٹ) تصنیف کی ضرورت ہوتی ہے۔                            |
@@ -260,40 +260,40 @@ src/
 
 ## `open-sse/` — اسٹریمنگ انجن ورک اسپیس
 
-علیحدہ npm ورک اسپیس (`@omniroute/open-sse`)۔ درخواستوں کی پروسیسنگ اور پرووائیڈر پر عمل درآمد سنبھالتا ہے۔
+علیحدہ این پی ایم ورک اسپیس (`@omniroute/open-sse`)۔ + فراہم کنندہ کے عمل درآمد کی درخواست کو ہینڈل کرتا ہے۔
 
 ```
 open-sse/
-├── handlers/            # 16 فائلیں (12 ہینڈلرز + 4 ہیلپرز): chatCore، responsesHandler، embeddings، audio، image، video، music، rerank، moderations، search وغیرہ۔
-├── executors/           # 150 ایگزیکیوٹر ماڈیولز (BaseExecutor کو وسعت دینے والی کلاسز + ہر پرووائیڈر کے لیے ہیلپرز)
-├── translator/          # فارمیٹ کنورٹرز (9 درخواست، 9 جواب، 9 ہیلپرز)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ سروس ماڈیولز (combo، accountFallback، autoCombo، reasoningCache، claude code/chatgpt stealth، modelDeprecation، taskAwareRouter، workflowFSM وغیرہ)
-├── mcp-server/          # MCP سرور (110 ٹولز، 3 ٹرانسپورٹس، 33 اسکوپس)
-├── config/              # پرووائیڈر/ماڈل رجسٹریاں، ہیڈر کنفیگریشن، ماڈل عرفی نام
-├── utils/               # TLS کلائنٹ، پراکسی fetch/dispatcher، نیٹ ورک ہیلپرز
-├── index.ts             # ورک اسپیس کا نقطۂ آغاز
-├── package.json         # ورک اسپیس مینی فیسٹ
-├── tsconfig.json        # ورک اسپیس TS کنفیگریشن
-└── types.d.ts           # ورک اسپیس کی ٹائپ ڈیکلریشنز
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| راستہ                       | مقصد                                                                     |
-| --------------------------- | ------------------------------------------------------------------------ |
-| `server.ts`                 | MCP سرور لائف سائیکل (stdio + HTTP ٹرانسپورٹس)                           |
-| `httpTransport.ts`          | HTTP Streamable + SSE ٹرانسپورٹس (`/api/mcp/sse`، `/api/mcp/stream`)     |
-| `audit.ts`                  | `mcp_tool_audit` ٹیبل میں آڈٹ لاگنگ                                      |
-| `scopeEnforcement.ts`       | ہر ٹول کے لیے اسکوپ کی توثیق                                             |
-| `runtimeHeartbeat.ts`       | `DATA_DIR/runtime/mcp-heartbeat.json` میں صحت کی ہارٹ بیٹ                |
-| `descriptionCompressor.ts`  | سیاق بچانے کے لیے ٹول کی تفصیل کا میٹا ڈیٹا کمپریس کرتا ہے               |
-| `schemas/tools.ts`          | 36 بنیادی ٹول تعریفیں + اسکوپس                                           |
-| `tools/advancedTools.ts`    | جدید ٹولز کے نفاذ                                                        |
-| `tools/memoryTools.ts`      | 3 میموری ٹولز (تلاش/اضافہ/صاف کرنا)                                      |
-| `tools/skillTools.ts`       | 4 اسکل ٹولز (فہرست/فعال کرنا/چلانا/عمل درآمدات)                          |
-| `tools/compressionTools.ts` | 5 کمپریشن ٹولز                                                           |
-| `README.md`                 | داخلی MCP سرور README (`docs/frameworks/MCP-SERVER.md` سے باہمی لنک شدہ) |
+| راستہ                       | مقصد                                                                    |
+| --------------------------- | ----------------------------------------------------------------------- |
+| `server.ts`                 | MCP سرور لائف سائیکل (stdio + HTTP ٹرانسپورٹ)                           |
+| `httpTransport.ts`          | HTTP سٹریم ایبل + SSE ٹرانسپورٹ (`/api/mcp/sse`, `/api/mcp/stream`)     |
+| `audit.ts`                  | `mcp_tool_audit` ٹیبل پر آڈٹ لاگنگ                                      |
+| `scopeEnforcement.ts`       | فی ٹول دائرہ کار کی توثیق                                               |
+| `runtimeHeartbeat.ts`       | صحت دل کی دھڑکن `DATA_DIR/runtime/mcp-heartbeat.json`                   |
+| `descriptionCompressor.ts`  | سیاق و سباق کو بچانے کے لیے ٹول کی تفصیل کا میٹا ڈیٹا کمپریس کریں۔      |
+| `schemas/tools.ts`          | 36 بیس ٹول کی تعریفیں + اسکوپس                                          |
+| `tools/advancedTools.ts`    | جدید ٹول کے نفاذ                                                        |
+| `tools/memoryTools.ts`      | 3 میموری ٹولز (search/add/clear)                                        |
+| `tools/skillTools.ts`       | 4 مہارت کے اوزار (list/enable/execute/executions)                       |
+| `tools/compressionTools.ts` | 5 کمپریشن ٹولز                                                          |
+| `README.md`                 | اندرونی MCP سرور README ( `docs/frameworks/MCP-SERVER.md` سے کراس لنکڈ) |
 
 ---
 
@@ -395,24 +395,24 @@ open-sse/
 
 ### اعلی درجے کے رہنما
 
-| ڈاکٹر                       | مقصد                                                                                         |
-| --------------------------- | -------------------------------------------------------------------------------------------- |
-| `ARCHITECTURE.md`           | اعلیٰ سطحی فن تعمیر، ذیلی نظام کا نقشہ، ڈیش بورڈ کی سطح                                      |
-| `CODEBASE_DOCUMENTATION.md` | انجینئرنگ حوالہ: ڈائریکٹریز، ماڈیولز، کنونشنز                                                |
-| `FEATURES.md`               | v3.8 ہائی لائٹس کے ساتھ فیچر میٹرکس                                                          |
-| `USER_GUIDE.md`             | اینڈ یوزر مینوئل (سیٹ اپ، ماڈلز، کومبوز، CLIs، آڈیو، وغیرہ)                                  |
-| `API_REFERENCE.md`          | auth ماڈل کے ساتھ API اینڈ پوائنٹ کا حوالہ                                                   |
-| `openapi.yaml`              | OpenAPI 3.0 spec (121 راستے)                                                                 |
-| `SETUP_GUIDE.md`            | انسٹال کرنے کے طریقے (npm، npx، Docker، Electron، Termux، ماخذ)                              |
-| `ENVIRONMENT.md`            | تمام env vars (~ 800 دستاویزی، ~ 3,050 لائنیں `.env.example`)                                |
-| `TROUBLESHOOTING.md`        | عام غلطیاں + v3.8.0 معلوم مسائل                                                              |
-| `RELEASE_CHECKLIST.md`      | مکمل رہائی کا بہاؤ (مہارت، ہسکی، روایتی کمٹ، تعیناتی)                                        |
-| `COVERAGE_PLAN.md`          | کوریج کے اہداف اور موجودہ حالت                                                               |
-| `FREE_TIERS.md`             | کیوریٹڈ فری ٹائر فراہم کنندگان (48 + مفت + 11 OAuth)                                         |
-| `CLI-TOOLS.md`              | بیرونی CLI انضمام + اندرونی OmniRoute CLI                                                    |
-| `I18N.md`                   | i18n فن تعمیر، ایک زبان کا اضافہ، 67 لوکیلز                                                  |
-| `UNINSTALL.md`              | ان انسٹال کے مراحل کو صاف کریں۔                                                              |
-| `PROVIDER_REFERENCE.md`     | **خود بخود تیار کردہ** 381 فراہم کنندگان کی فہرست ( regen: `npm run gen:provider-reference`) |
+| ڈاکٹر                       | مقصد                                                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `ARCHITECTURE.md`           | اعلیٰ سطحی فن تعمیر، ذیلی نظام کا نقشہ، ڈیش بورڈ کی سطح                                               |
+| `CODEBASE_DOCUMENTATION.md` | انجینئرنگ حوالہ: ڈائریکٹریز، ماڈیولز، کنونشنز                                                         |
+| `FEATURES.md`               | v3.8 ہائی لائٹس کے ساتھ فیچر میٹرکس                                                                   |
+| `USER_GUIDE.md`             | اینڈ یوزر مینوئل (سیٹ اپ، ماڈلز، کومبوز، CLIs، آڈیو، وغیرہ)                                           |
+| `API_REFERENCE.md`          | auth ماڈل کے ساتھ API اینڈ پوائنٹ کا حوالہ                                                            |
+| `openapi.yaml`              | OpenAPI 3.0 spec (121 راستے)                                                                          |
+| `SETUP_GUIDE.md`            | انسٹال کرنے کے طریقے (npm، npx، Docker، Electron، Termux، ماخذ)                                       |
+| `ENVIRONMENT.md`            | تمام env vars (~ 800 دستاویزی، ~ 3,050 لائنیں `.env.example`)                                         |
+| `TROUBLESHOOTING.md`        | عام غلطیاں + v3.8.0 معلوم مسائل                                                                       |
+| `RELEASE_CHECKLIST.md`      | مکمل رہائی کا بہاؤ (مہارت، ہسکی، روایتی کمٹ، تعیناتی)                                                 |
+| `COVERAGE_PLAN.md`          | کوریج کے اہداف اور موجودہ حالت                                                                        |
+| `FREE_TIERS.md`             | کیوریٹڈ فری ٹائر فراہم کنندگان (48 + مفت + 11 OAuth)                                                  |
+| `CLI-TOOLS.md`              | بیرونی CLI انضمام + اندرونی OmniRoute CLI                                                             |
+| `I18N.md`                   | i18n فن تعمیر، ایک زبان کا اضافہ، 67 لوکیلز                                                           |
+| `UNINSTALL.md`              | ان انسٹال کے مراحل کو صاف کریں۔                                                                       |
+| `PROVIDER_REFERENCE.md`     | **خود کار طریقے سے تیار کردہ** 389 فراہم کنندگان کی فہرست ( regen : `npm run gen:provider-reference`) |
 
 ### سب سسٹم گہرے غوطے
 

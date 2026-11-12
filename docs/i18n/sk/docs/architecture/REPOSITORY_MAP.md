@@ -154,7 +154,7 @@ src/
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Stránka ovládacieho panela Traffic Inspector — rozdelenie DevTools, 7 kariet s podrobnosťami, 4 prepínače režimu snímania, záznam relácie, zafarbenie kontextu. i18n PT-BR + EN. Pozri `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                     |
 | `app/(dashboard)/dashboard/activity/`                                        | Stránka informačného kanála aktivity (skupina B): `page.tsx` (server) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — pozri `docs/architecture/MONITORING_SECTIONS.md`                                                                                       |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | Stránka zdieľania kvót (skupina B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                    |
-| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Konfiguračná stránka plánu poskytovateľa (skupina B): `page.tsx` + `ProviderPlanConfigClient.tsx` — kvótové dimenzie na pripojenie prepísania                                                                                                                                                                      |
+| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Stránka konfigurácie plánu poskytovateľa (skupina B): `page.tsx` + `ProviderPlanConfigClient.tsx` — kvótové dimenzie na pripojenie prepísania                                                                                                                                                                      |
 | `app/docs/`                                                                  | Vložený prehliadač dokumentácie (vykresľuje `docs/*.md`)                                                                                                                                                                                                                                                           |
 | `app/landing/`                                                               | Marketingová vstupná stránka                                                                                                                                                                                                                                                                                       |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | Stránky súvisiace s autorizáciou                                                                                                                                                                                                                                                                                   |
@@ -193,7 +193,7 @@ src/
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 obal — KNN brute-force + hybrid RRF ( vektor FTS5 +, k = 60). Lazy-init, ladne degraduje, keď sqlite-vec nie je k dispozícii. (plán 21)                                                                                                                                                                        |
 | `memory/reindex.ts`                      | `runReindexBatch()` — spracováva spomienky so `needs_reindex=1` na pozadí; volaná `POST /api/memory/reindex` a lazy-backfill path. (plán 21)                                                                                                                                                                                     |
 | `monitoring/`                            | Zdravotné kontroly, emisie metrík                                                                                                                                                                                                                                                                                                |
-| `oauth/`                                 | toky OAuth/import pre 22 modulov poskytovateľov (agy, antigravity, claude, cline, codebuddy-cn, codex, kurzor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, xenoquder, open zed-hosted, zed)                                                                           |
+| `oauth/`                                 | toky OAuth/import pre 22 modulov poskytovateľa (agy, antigravity, claude, cline, codebuddy-cn, codex, kurzor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, xenoquder, open zed-hosted, zed)                                                                            |
 | `plugins/`                               | Register zásuvných modulov                                                                                                                                                                                                                                                                                                       |
 | `promptCache/`                           | Antropické zarážky rýchlej vyrovnávacej pamäte                                                                                                                                                                                                                                                                                   |
 | `skills/`                                | Rámec zručností (vstavaný trh + + SkillsSH) — pozri `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                                  |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Komponent palubnej dosky API: adaptéry cez `packages/ui-kit` — pozri `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: názvy ikon používané obrazovkami → komponenty Lucide (`<Icon>`)                               |
-| `constants/providers.ts`         | **381 poskytovateľov** s overením Zod (zdroj pravdy)                                                      |
+| `constants/providers.ts`         | **389 poskytovateľov** s overením Zod (zdroj pravdy)                                                      |
 | `constants/cliTools.ts`          | Externý register nástrojov CLI                                                                            |
 | `constants/routingStrategies.ts` | **20 stratégií smerovania** s prioritami                                                                  |
 | `constants/publicApiRoutes.ts`   | Trasy, ktoré vyžadujú overenie nositeľa (v porovnaní so správou).                                         |
@@ -258,42 +258,42 @@ src/
 
 ---
 
-## `open-sse/` — Pracovný priestor streamovacieho jadra
+## `open-sse/` — Pracovný priestor nástroja na streamovanie
 
-Samostatný pracovný priestor npm (`@omniroute/open-sse`). Spracúva požiadavky a vykonávanie poskytovateľov.
+Samostatný pracovný priestor npm (`@omniroute/open-sse`). Spracúva spustenie žiadosti poskytovateľa +.
 
 ```
 open-sse/
-├── handlers/            # 16 súborov (12 obslužných modulov + 4 pomocné moduly): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search atď.
-├── executors/           # 150 vykonávacích modulov (triedy rozširujúce BaseExecutor + pomocné moduly pre jednotlivých poskytovateľov)
-├── translator/          # Konvertory formátov (9 pre požiadavky, 9 pre odpovede, 9 pomocných)
+├── handlers/            # 16 files (12 handlers + 4 helpers): chatCore, responsesHandler, embeddings, audio, image, video, music, rerank, moderations, search, etc.
+├── executors/           # 163 executor modules (classes extending BaseExecutor + per-provider helpers)
+├── translator/          # Format converters (9 request, 9 response, 9 helpers)
 ├── transformer/         # Responses API ↔ Chat Completions (TransformStream)
-├── services/            # ~80+ modulov služieb (combo, accountFallback, autoCombo, reasoningCache, skrytý režim claude code/chatgpt, modelDeprecation, taskAwareRouter, workflowFSM atď.)
-├── mcp-server/          # Server MCP (110 nástrojov, 3 transporty, 33 rozsahov)
-├── config/              # Registre poskytovateľov/modelov, konfigurácia hlavičiek, aliasy modelov
-├── utils/               # Klient TLS, proxy načítavanie/dispečer, sieťové pomocné moduly
-├── index.ts             # Vstupný bod pracovného priestoru
-├── package.json         # Manifest pracovného priestoru
-├── tsconfig.json        # Konfigurácia TS pracovného priestoru
-└── types.d.ts           # Deklarácie typov pracovného priestoru
+├── services/            # ~80+ service modules (combo, accountFallback, autoCombo, reasoningCache, claude code/chatgpt stealth, modelDeprecation, taskAwareRouter, workflowFSM, etc.)
+├── mcp-server/          # MCP server (110 tools, 3 transports, 33 scopes)
+├── config/              # Provider/model registries, header config, model aliases
+├── utils/               # TLS client, proxy fetch/dispatcher, network helpers
+├── index.ts             # Workspace entry
+├── package.json         # Workspace manifest
+├── tsconfig.json        # Workspace TS config
+└── types.d.ts           # Workspace type declarations
 ```
 
 ### `open-sse/mcp-server/`
 
-| Cesta                       | Účel                                                                                   |
-| --------------------------- | -------------------------------------------------------------------------------------- |
-| `server.ts`                 | Životný cyklus servera MCP (transporty stdio + HTTP)                                   |
-| `httpTransport.ts`          | Streamovateľné transporty HTTP + SSE (`/api/mcp/sse`, `/api/mcp/stream`)               |
-| `audit.ts`                  | Zaznamenávanie auditu do tabuľky `mcp_tool_audit`                                      |
-| `scopeEnforcement.ts`       | Overovanie rozsahu pre jednotlivé nástroje                                             |
-| `runtimeHeartbeat.ts`       | Signál o stave do `DATA_DIR/runtime/mcp-heartbeat.json`                                |
-| `descriptionCompressor.ts`  | Komprimuje metadáta opisov nástrojov s cieľom šetriť kontext                           |
-| `schemas/tools.ts`          | 36 základných definícií nástrojov + rozsahy                                            |
-| `tools/advancedTools.ts`    | Implementácie pokročilých nástrojov                                                    |
-| `tools/memoryTools.ts`      | 3 pamäťové nástroje (vyhľadanie/pridanie/vymazanie)                                    |
-| `tools/skillTools.ts`       | 4 nástroje zručností (zoznam/povolenie/vykonanie/vykonania)                            |
-| `tools/compressionTools.ts` | 5 kompresných nástrojov                                                                |
-| `README.md`                 | Interný súbor README servera MCP (krížovo prepojený z `docs/frameworks/MCP-SERVER.md`) |
+| Cesta                       | Účel                                                                     |
+| --------------------------- | ------------------------------------------------------------------------ |
+| `server.ts`                 | životný cyklus servera MCP (prenosy stdio + HTTP )                       |
+| `httpTransport.ts`          | HTTP Streamovateľné prenosy + SSE (`/api/mcp/sse`, `/api/mcp/stream`)    |
+| `audit.ts`                  | Audit logovania do tabuľky `mcp_tool_audit`                              |
+| `scopeEnforcement.ts`       | Overenie rozsahu pre jednotlivé nástroje                                 |
+| `runtimeHeartbeat.ts`       | Zdravie tlkot srdca do `DATA_DIR/runtime/mcp-heartbeat.json`             |
+| `descriptionCompressor.ts`  | Komprimujte metadáta popisu nástroja na uloženie kontextu                |
+| `schemas/tools.ts`          | 36 základných definícií nástrojov + rozsahy                              |
+| `tools/advancedTools.ts`    | Pokročilé implementácie nástrojov                                        |
+| `tools/memoryTools.ts`      | 3 pamäťové nástroje (search/add/clear)                                   |
+| `tools/skillTools.ts`       | 4 nástroje zručností (list/enable/execute/executions)                    |
+| `tools/compressionTools.ts` | 5 kompresných nástrojov                                                  |
+| `README.md`                 | Interný server MCP README (prepojený zo `docs/frameworks/MCP-SERVER.md`) |
 
 ---
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Externé integrácie CLI + Interné OmniRoute CLI                                                  |
 | `I18N.md`                   | architektúra i18n, pridanie jazyka, 67 miestnych nastavení                                      |
 | `UNINSTALL.md`              | Čisté kroky odinštalovania                                                                      |
-| `PROVIDER_REFERENCE.md`     | **Automaticky generované** katalóg 381 poskytovateľov (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Automaticky generované** katalóg 389 poskytovateľov (regen: `npm run gen:provider-reference`) |
 
 ### Subsystém hĺbkové ponory
 
@@ -426,7 +426,7 @@ open-sse/
 | `RADAR.md`                                 | Prekrytie katalógu bezplatného modelu radaru (`RADAR_ENABLED`, predvolene vypnuté) |
 | `MEMORY.md`                                | Pamäťový systém (SQLite FTS5 + Qdrant)                                             |
 | `EVALS.md`                                 | Eval framework (sady, runy, rubriky)                                               |
-| `GUARDRAILS.md`                            | PII masker, rýchla injekcia, most videnia                                          |
+| `GUARDRAILS.md`                            | maskovač PII, rýchla injekcia, most videnia                                        |
 | `COMPLIANCE.md`                            | Protokol auditu, uchovávanie, odhlásenie noLog                                     |
 | `WEBHOOKS.md`                              | Doručenie webhooku podpísaného HMAC                                                |
 | `REASONING_REPLAY.md`                      | Hybridná vyrovnávacia pamäť memory/SQLite pre `reasoning_content`                  |
